@@ -61,9 +61,17 @@ Classes and methods definition.
 Definition of the different states and their transition (transition functions)
 
 - splashScreen
+Has a button to start playing with our character displayedand intro message. Play button should have an addEventListener() to call removeSplashScreen(), buildGameScreen() and startGame():
+
 - gameScreen
+When game is over removeGameScreen(), buildGameoverScreen() should be called.
+
 - gameoverScreen
+Simple <div> element displaying our character with fail message. A Play Again button should be displayed. When clicked, removeGameoverScreen(), buildGameScreen() and startGame() should be called to start a new game.
+  
 - winScreen
+Simple <div> element displaying our character with winning message. We use the same elements as gameoverScreen but change only the message. Play Again should be displayed with the same behaviour as gameoverScreen.
+
 
 ![alt text](assets/IMG_20190117_165702.jpg "My project wireframes")
 
@@ -97,11 +105,9 @@ Task definition in order of priority
 - Limit character's moves to canvas size
 - Limit enemies' moves to canvas size
 - Implement collision logic
+- Make enemies chase main character
 - End game on collision
 - Implement play again action on end screen
-
--------------------------------
-
 
 
 
@@ -114,7 +120,7 @@ Task definition in order of priority
 
 ### Git
 URls for the project repo and deploy
-[Link Repo](http://github.com)
+[Link Repo](https://github.com/nicolacaze/beyond-the-wall)
 [Link Deploy](http://github.com)
 
 
