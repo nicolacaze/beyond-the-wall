@@ -65,8 +65,8 @@ Definition of the different states and their transition (transition functions)
 - gameoverScreen
 - winScreen
 
-![alt tag](https://drive.google.com/open?id=1A3hoR_oBsZUlwUiOA69Udqwf2LQYL_Rs
- "My project wireframes")
+![alt text](assets/IMG_20190117_165702.jpg "My project wireframes")
+
 
 ## Task
 Task definition in order of priority
