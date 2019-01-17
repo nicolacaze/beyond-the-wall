@@ -1,0 +1,81 @@
+
+/* ---- reset ---- */
+
+html {
+  box-sizing: border-box;
+  background: url(../assets/the-wall.png) no-repeat center center fixed;
+  background-size: cover;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  
+
+}
+
+
+/* ---- typography ---- */
+
+body {
+  color: #111;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 147%;
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+}
+
+h2 {}
+
+h3 {}
+
+p {
+  margin: 0;
+}
+
+.splash-screen p {
+  color: #fff;
+  text-align: center;
+  margin-top: 32px;
+}
+
+
+/* ---- layout ---- */
+
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 600px;
+  height: 500px;
+  margin: 0 auto;
+  background: #000;
+}
+
+.hide-splash-screen {
+  display: none; 
+}
+
+
+/* ---- components ---- */
+
+.splash-screen img {
+  width: 100px;
+  margin: 0 auto;
+}
+
+.play-btn {
+  margin: 0 auto;
+  width: 200px;
+  background: #fff;
+  color: #000;
+  padding: 20px 10px;
+  margin-bottom: 32px;
+}
