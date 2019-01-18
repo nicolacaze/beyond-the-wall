@@ -11,20 +11,23 @@ var context = canvas.getContext('2d');
 
 var game = new Game(canvas);
 
-context.fillStyle='#fff';
-context.fillRect(200, 200, 50, 50);
+// game.init();
+function onKeyDown(event) {
+  switch(event.key) {
+    case 68:
+    game.KeyRight();
 
-
-
-
-
-
-function transitionBetweenScreens(toBeHidden, toBeDisplayed) {
-  toBeHidden.classList.remove('displayed');
-  toBeHidden.classList.add('hidden');
-  toBeDisplayed.classList.remove('hidden');
-  toBeDisplayed.classList.add('displayed');
+  }
 }
+
+document.addEventListener('keydown', onKeyDown);
+
+// function transitionBetweenScreens(toBeHidden, toBeDisplayed) {
+//   toBeHidden.classList.remove('displayed');
+//   toBeHidden.classList.add('hidden');
+//   toBeDisplayed.classList.remove('hidden');
+//   toBeDisplayed.classList.add('displayed');
+// }
 
 // playBtn.addEventListener('click', function() {
 //   transitionBetweenScreens(splashScreen, gameScreen);
