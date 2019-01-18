@@ -33,6 +33,7 @@ If collision between our character and one enemy happens, end the game. When tim
 - Add sounds effect on sollision
 - Change behaviour based on artifacts collision
 - Generate 2 layers map
+- Code refactoring
 
 
 ## Data structure
@@ -42,10 +43,10 @@ Classes and methods definition.
   
   ```javascript
   Game(canvas) {
-    self.ctx;
-    self.hero;
-    self.enemies;
-    self.isGameOver;
+    this.ctx;
+    this.hero;
+    this.enemies;
+    this.isGameOver;
   }
 
   Game.prototype.init() {
@@ -59,7 +60,7 @@ Classes and methods definition.
       // clear Canvas
       ctx.clearCanvas();
 
-      // Render new canvas
+      // render new canvas
       Game.render();
 
       Frame(loop)
@@ -69,32 +70,37 @@ Classes and methods definition.
 
   Game.prototype.update();
   Game.prototype.render() {
-    map.render();
+    map.draw();
     hero.draw();
     enemies.draw();
-  }
+  }  
   ```
    
    map.js
    
    ```javascript
    Map(canvas) {
-   self.map = {}
-   self.getTile()
+   this.ctx
+   this.map = {}
+   this.getTile()
    }
    
-   Map.prototype.render()
+   Map.prototype.draw()
    ```
    
    hero.js
    
    ```javascript
    Hero(canvas) {
-   self.x
-   self.y
-   self.speed
+   this.ctx
+   this.x
+   this.y
+   this.directionX
+   this.directionY
+   this.speed
    }
    
+   Hero.prototype.setDirection()
    Hero.prototype.move()    
    Hero.prototype.draw()
    ```
@@ -103,11 +109,15 @@ Classes and methods definition.
    
    ```javascript
    Enemy(canvas) {
-   self.x
-   self.y
-   self.speed
+   this.ctx
+   this.x
+   this.y
+   this.directionX
+   this.directionY
+   this.speed
    }
    
+   Enemy.prototype.setDirection()
    Enemy.prototype.move()    
    Enemy.prototype.draw()
    ```
