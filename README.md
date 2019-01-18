@@ -38,17 +38,76 @@ If collision between our character and one enemy happens, end the game. When tim
 ## Data structure
 Classes and methods definition.
 
-  - Game
-    - init()
-    - start()
-    - stop()
-  - Map // the map object being rendered for the Game
-    - render()
-  - Hero // main player character
-    - move()
-  - Enemy 
-   - move()
+  ###game.js
   
+  ```javascript
+  Game(canvas) {
+    self.ctx;
+    self.hero;
+    self.enemies;
+    self.isGameOver;
+  }
+
+  Game.prototype.init() {
+    loop() {
+      // update characters position
+      Game.update();
+
+      // clear Canvas
+      ctx.clearCanvas();
+
+      // Render new canvas
+      Game.render();
+
+      Frame(loop)
+    }    
+    Frame(loop)  
+  }
+
+  Game.prototype.update();
+  Game.prototype.render() {
+    map.render();
+    hero.draw()
+    enemies.draw()
+  }
+     ```
+   
+   ###map.js
+   
+   ```javascript
+   Map(canvas) {
+   self.map = {}
+   self.getTile()
+   }
+   
+   Map.prototype.render()
+   ```
+   
+   ###hero.js
+   
+   ```javascript
+   Hero(canvas) {
+   self.x
+   self.y
+   self.speed
+   }
+   
+   Hero.prototype.move()    
+   Hero.prototype.draw()
+   ```
+   
+   ###enemy.js
+   
+   ```javascript
+   Enemy(canvas) {
+   self.x
+   self.y
+   self.speed
+   }
+   
+   Enemy.prototype.move()    
+   Enemy.prototype.draw()
+   ```
 
   
 -------------------------------
@@ -64,7 +123,7 @@ Definition of the different states and their transition (transition functions)
 Has a button to start playing with our character displayedand intro message. Play button should have an addEventListener() to call removeSplashScreen(), buildGameScreen() and startGame():
 
 - gameScreen
-When game is over removeGameScreen(), buildGameoverScreen() should be called.
+When game is over removeGameScreen(), buildGameOverScreen() should be called.
 
 - gameoverScreen
 Simple <div> element displaying our character with fail message. A Play Again button should be displayed. When clicked, removeGameoverScreen(), buildGameScreen() and startGame() should be called to start a new game.
@@ -108,6 +167,7 @@ Task definition in order of priority
 - Make enemies chase main character
 - End game on collision
 - Implement play again action on end screen
+- sugarcoating
 
 
 
