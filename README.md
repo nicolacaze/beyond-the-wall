@@ -52,6 +52,9 @@ Classes and methods definition.
     loop() {
       // update characters position
       Game.update();
+      
+      // Check for collision
+      Game.checkForCollision();
 
       // clear Canvas
       ctx.clearCanvas();
@@ -67,8 +70,8 @@ Classes and methods definition.
   Game.prototype.update();
   Game.prototype.render() {
     map.render();
-    hero.draw()
-    enemies.draw()
+    hero.draw();
+    enemies.draw();
   }
   ```
    
