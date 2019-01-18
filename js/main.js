@@ -13,9 +13,11 @@ var game = new Game(canvas);
 
 // game.init();
 function onKeyDown(event) {
-  switch(event.key) {
+  switch(event.keyCode) {
     case 68:
-    game.KeyRight();
+    game.keyRight();
+    console.log('D was pressed');
+    break;
 
   }
 }

@@ -10,8 +10,13 @@ function Hero(canvas) {
   this.image = new Image(64,64);
 }
 
-Hero.prototype.setDirectionX = function() {
-  this.directionX += 1;
+Hero.prototype.setDirection = function(direction) {
+  switch(direction) {
+    case 'right':
+    this.directionX = 1;
+    break;
+  }
+
 }
 
 Hero.prototype.move = function() {

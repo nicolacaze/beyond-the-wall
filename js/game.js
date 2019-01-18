@@ -8,7 +8,7 @@ function Game(canvas) {
   this.isGameOver;
 
   this._update = function() {
-    this.hero.move();
+    // this.hero.move();
   }
 
   this._clearCanvas = function() {
@@ -37,5 +37,11 @@ Game.prototype.init = function() {
     this.animation = window.requestAnimationFrame(loop.bind(this));
   }    
   loop.call(this); 
+
+}
+
+Game.prototype.keyRight = function() {
+  this.hero.setDirection('right');
+  this.hero.move();
 }
 
