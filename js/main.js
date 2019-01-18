@@ -16,9 +16,18 @@ function onKeyDown(event) {
   switch(event.keyCode) {
     case 68:
     game.keyRight();
-    console.log('D was pressed');
     break;
-
+    case 65:
+    game.keyLeft();
+    break;
+    case 87:
+    game.keyUp();
+    break;
+    case 83:
+    game.keyDown();
+    break;
+    default:
+    console.log('No key was pressed');
   }
 }
 
