@@ -1,53 +1,34 @@
 'use strict';
 
-var playBtn = document.querySelector('.splash-screen button');
-var splashScreen = document.querySelector('.splash-screen');
+var playBtn = document.querySelector('.screen button');
+var splashScreen = document.querySelector('.screen');
 var gameScreen = document.querySelector('.game-screen');
+var statusCard = document.querySelector('.player-status-card');
 var playAgainBtn = document.querySelector('.game-over-screen button');
 var gameOverScreen = document.querySelector('.game-over-screen');
 
-
-function removeSplashScreen() {
-  splashScreen.classList.add('hide-splash-screen');
-}
-
-function buildGameScreen() {
-  gameScreen.classList.add('display-game-screen');
-
-  // Simulate end game after 5 seconds
-  setTimeout(function() {
-    removeGameScreen();
-    buildGameOverScreen();
-  }, 5000);
-  
-}
-
-function removeGameScreen() {
-  gameScreen.classList.remove('display-game-screen');
-}
-
-function buildGameOverScreen() {
-  gameOverScreen.classList.add('display-game-over');
-  
-}
-
-function removeGameOverScreen() {
-  gameOverScreen.classList.add('game-over');
+function transitionBetweenScreens(toBeHidden, toBeDisplayed) {
+  toBeHidden.classList.remove('displayed');
+  toBeHidden.classList.add('hidden');
+  toBeDisplayed.classList.remove('hidden');
+  toBeDisplayed.classList.add('displayed');
 }
 
 playBtn.addEventListener('click', function() {
-
-  removeSplashScreen();
-  buildGameScreen();
-
+  transitionBetweenScreens(splashScreen, gameScreen);
   // start game
-
   //End Game
-  buildGameOverScreen();
+  // buildGameOverScreen();
 });
 
-playAgainBtn.addEventListener('click', function(){
-
+statusCard.addEventListener('click', function() {
+  transitionBetweenScreens(gameScreen, gameOverScreen);
 });
+
+playAgainBtn.addEventListener('click', function() {
+  transitionBetweenScreens(gameOverScreen, gameScreen);
+});
+
+
 
 

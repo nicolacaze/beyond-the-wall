@@ -41,7 +41,7 @@ p {
   margin: 0;
 }
 
-.splash-screen p {
+.screen p {
   color: #fff;
   text-align: center;
   font-size: 1.5rem;
@@ -76,8 +76,12 @@ p {
   background: #000;
 }
 
-.splash-screen {
+.displayed {
   display: flex;
+}
+
+.hidden {
+  display: none;
 }
 
 .character-selection {
@@ -86,18 +90,9 @@ p {
   justify-content: center;
 }
 
-.hide-splash-screen {
-  display: none;
-}
-
 .game-screen {
-  display: none; 
   flex-direction: row;
   justify-content: center;
-}
-
-.display-game-screen {
-  display: flex;
 }
 
 .player-status-card {
@@ -123,22 +118,10 @@ p {
   float: left;
 }
 
-.game-over-screen {
-  display: none;
-}
-
-.display-game-over {
-  display: flex;
-}
-
 
 /* ---- components ---- */
 
-.splash-screen img {
-  width: 100px;
-}
-
-.splash-screen button {
+.screen button {
   margin: 0 auto;
   width: 200px;
   background: #fff;
