@@ -70,7 +70,7 @@ Classes and methods definition.
     hero.draw()
     enemies.draw()
   }
-     ```
+  ```
    
    map.js
    
