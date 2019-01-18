@@ -6,21 +6,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preload" href="assets/jon-snow-icon.png" as="image">
+  <link rel="preload" href="assets/the-wall.png" as="image">
 </head>
 
 <body>
   <h1>Beyond the wall</h1>
+
 <!-- Here starts the splash screen -->
-  <div class="splash-screen">
+  <div class="screen splash-screen">
     <p>Survive beyond the wall before winter comes...</p>
-    <img src="assets/jon-snow-icon.png" alt="jon-snow-icon">
-    <button class="play-btn">Play</button>
+    <div class="character-selection">
+      <img src="assets/jon-snow-icon.png" alt="jon-snow-icon">
+      <p>Jon Snow</p>
+    </div>
+    <button>Play</button>
   </div>
 
   <!-- Here starts the game screen -->
+  <div class="game-screen">
+    <div class="player-status-card">
+      <p>Jon Snow</p>
+    </div>
+    <canvas id="canvas" width="576" height="576"></canvas>
+  </div> 
 
   <!-- Here starts the game over screen -->
-
+  <div class="screen game-over-screen">
+    <img src="assets/jon-snow-icon.png" alt="jon-snow-icon">
+    <p>Congrats! You survived.</p>
+    <button>Play Again</button>
+  </div> 
 
   <script src="js/main.js"></script>
 </body>

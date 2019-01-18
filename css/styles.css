@@ -13,7 +13,6 @@ html {
 body {
   margin: 0;
   padding: 0;
-  
 
 }
 
@@ -30,6 +29,8 @@ body {
 h1 {
   color: #fff;
   text-align: center;
+  font-size: 3rem;
+  margin-bottom: 3rem;
 }
 
 h2 {}
@@ -43,14 +44,30 @@ p {
 .splash-screen p {
   color: #fff;
   text-align: center;
-  margin-top: 32px;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  
+}
+
+.character-selection p {
+  margin-left: 2rem;
+  font-size: 1rem;
+}
+
+.game-screen p {
+  color: #fff;
+}
+
+.game-over-screen p {
+  color: #fff;
+  text-align: center;
+  margin-top: 2rem;
 }
 
 
 /* ---- layout ---- */
 
-.splash-screen {
-  display: flex;
+.screen {
   flex-direction: column;
   justify-content: space-between;
   width: 600px;
@@ -59,8 +76,59 @@ p {
   background: #000;
 }
 
+.splash-screen {
+  display: flex;
+}
+
+.character-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .hide-splash-screen {
+  display: none;
+}
+
+.game-screen {
   display: none; 
+  flex-direction: row;
+  justify-content: center;
+}
+
+.display-game-screen {
+  display: flex;
+}
+
+.player-status-card {
+  background: #000;
+  border-radius: 1rem;
+  flex-shrink: .5;
+  flex-basis: 20%;
+  height: 80%;
+  margin-right: 4rem;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.player-status-card p {
+  font-size: 1rem;
+  margin-left: 1rem;
+
+}
+
+.player-status-card::before {
+  content: url(../assets/jon-snow-icon.png);
+  float: left;
+}
+
+.game-over-screen {
+  display: none;
+}
+
+.display-game-over {
+  display: flex;
 }
 
 
@@ -68,14 +136,31 @@ p {
 
 .splash-screen img {
   width: 100px;
-  margin: 0 auto;
 }
 
-.play-btn {
+.splash-screen button {
   margin: 0 auto;
   width: 200px;
   background: #fff;
   color: #000;
-  padding: 20px 10px;
-  margin-bottom: 32px;
+  padding: 1rem 1rem;
+  margin-bottom: 2rem;
+}
+
+#canvas {
+  background: #000;
+}
+
+.game-over-screen img {
+  width: 100px;
+  margin: 2rem auto;
+}
+
+.game-over-screen button {
+  margin: 0 auto;
+  width: 200px;
+  background: #fff;
+  color: #000;
+  padding: 1rem 1rem;
+  margin-bottom: 2rem;
 }
