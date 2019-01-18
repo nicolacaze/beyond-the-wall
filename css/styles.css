@@ -80,9 +80,9 @@ p {
   display: flex;
 }
 
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 
 .character-selection {
   display: flex;
