@@ -38,7 +38,7 @@ If collision between our character and one enemy happens, end the game. When tim
 ## Data structure
 Classes and methods definition.
 
-  ###game.js
+  game.js
   
   ```javascript
   Game(canvas) {
@@ -72,7 +72,7 @@ Classes and methods definition.
   }
      ```
    
-   ###map.js
+   map.js
    
    ```javascript
    Map(canvas) {
@@ -83,7 +83,7 @@ Classes and methods definition.
    Map.prototype.render()
    ```
    
-   ###hero.js
+   hero.js
    
    ```javascript
    Hero(canvas) {
@@ -96,7 +96,7 @@ Classes and methods definition.
    Hero.prototype.draw()
    ```
    
-   ###enemy.js
+   enemy.js
    
    ```javascript
    Enemy(canvas) {
