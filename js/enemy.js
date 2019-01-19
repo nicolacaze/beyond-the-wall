@@ -6,9 +6,9 @@ function WhiteWalker(canvas) {
   this.x = 200;
   this.y = 200;
   this.directionX = 1;
-  this.directionY = 1;
-  this.size;
-  this.speed = 1;
+  this.directionY = -1;
+  this.size = 64;
+  this.speed = 3;
   this.image = new Image();
 }
 
@@ -31,17 +31,55 @@ WhiteWalker.prototype.setDirection = function(direction) {
   }
 }
 
-WhiteWalker.prototype.move = function(axis) {
+WhiteWalker.prototype.hasReachedLeft = function() {
+  if(this.x <= 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
-  if(axis === 'x') {
-    this.x += this.directionX * this.speed;
-  } else if(axis === 'y') {
-    this.y += this.directionY * this.speed;
-  } 
+WhiteWalker.prototype.hasReachedRight = function() {
+  if (this.x >= this.canvas.width - this.size) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+WhiteWalker.prototype.hasReachedTop = function() {
+  if (this.y <= 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+WhiteWalker.prototype.hasReachedBottom = function() {
+  if (this.y >= this.canvas.height - this.size) {
+    return true;
+  } else {
+    return false;
+  }
+}
+WhiteWalker.prototype.move = function() {
+  
+  if(this.hasReachedLeft()) {
+    this.setDirection('right');
+  } else if(this.hasReachedRight()) {
+    this.setDirection('left');
+  } else if(this.hasReachedTop()) {
+    this.setDirection('down');
+  } else if(this.hasReachedBottom()) {
+    this.setDirection('up');
+  }
+  this.x += this.directionX * this.speed;
+  this.y += this.directionY * this.speed;
 }
 
 WhiteWalker.prototype.draw = function() {
   this.image.src = './assets/white-walker.png';
+  //Change size of enemy here by passing 2 more arguments
   this.context.drawImage(this.image, this.x, this.y);
 }
 

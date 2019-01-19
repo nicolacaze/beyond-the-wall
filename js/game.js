@@ -8,7 +8,7 @@ function Game(canvas) {
   this.isGameOver;
 
   this._update = function() {
-    this.enemies.move('x');
+    this.enemies.move();
   }
 
   this._clearCanvas = function() {
