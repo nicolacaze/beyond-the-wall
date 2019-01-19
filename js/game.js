@@ -18,11 +18,11 @@ function Game(canvas) {
   }
 
   this._adjustEnemiesDirection = function() {
-    
-    var isHeroOnLeftSide = this.hero.x - this.hero.size / 2 < this.enemmies.x + this.enemies.size / 2;
+
+    var isHeroOnLeftSide = this.hero.x - this.hero.size / 2 < this.enemies.x + this.enemies.size / 2;
     var isHeroOnRightSide = this.hero.x + this.hero.size / 2 > this.enemies.x - this.enemies.size / 2;
     var isHeroAbove = this.hero.y + this.hero.size / 2 < this.enemies.y - this.enemies.size / 2;
-    var isHeroBelow = this.hero.y - this.hero.size / 2 < this.enemies.y + this.enemies.size / 2;
+    var isHeroBelow = this.hero.y - this.hero.size / 2 > this.enemies.y + this.enemies.size / 2;
 
     if(isHeroOnLeftSide) {
       this.enemies.setDirection('left');
