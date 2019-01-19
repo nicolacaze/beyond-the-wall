@@ -27,7 +27,7 @@ WhiteWalker.prototype.setDirection = function(direction) {
     this.directionY = 1;
     break;
     default:
-    console.log('No direction change');
+    console.log('No direction change for WhiteWalker');
   }
 }
 
@@ -72,6 +72,27 @@ WhiteWalker.prototype.checkForEdges = function() {
     this.setDirection('down');
   } else if(this.hasReachedBottom()) {
     this.setDirection('up');
+  }
+}
+
+WhiteWalker.prototype.followHero = function(hero) {
+
+  var isHeroOnLeftSide = hero.x + hero.size / 2 < this.x + this.size / 2;
+  var isHeroOnRightSide = hero.x + hero.size / 2 > this.x + this.size / 2;
+  var isHeroAbove = hero.y + hero.size / 2 < this.y + this.size / 2;
+  var isHeroBelow = hero.y + hero.size / 2 > this.y + this.size / 2;
+
+  if(isHeroOnLeftSide) {
+    this.setDirection('left');
+  } 
+  if(isHeroOnRightSide) {
+    this.setDirection('right');
+  } 
+  if(isHeroAbove) {
+    this.setDirection('top');
+  } 
+  if(isHeroBelow) {
+    this.setDirection('down');
   }
 }
 

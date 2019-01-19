@@ -10,33 +10,33 @@ function Game(canvas) {
   this._update = function() {
 
     //check for hero position and adjust enemies direction accordingly
-    this._adjustEnemiesDirection();
+    this.enemies.followHero(this.hero);
     this.enemies.move();
     if(this.hero.hasCollidedWithEnemy(this.enemies)) {
       console.log('GAME OVER');
     }
   }
 
-  this._adjustEnemiesDirection = function() {
+  // this._adjustEnemiesDirection = function() {
 
-    var isHeroOnLeftSide = this.hero.x - this.hero.size / 2 < this.enemies.x + this.enemies.size / 2;
-    var isHeroOnRightSide = this.hero.x + this.hero.size / 2 > this.enemies.x - this.enemies.size / 2;
-    var isHeroAbove = this.hero.y + this.hero.size / 2 < this.enemies.y - this.enemies.size / 2;
-    var isHeroBelow = this.hero.y - this.hero.size / 2 > this.enemies.y + this.enemies.size / 2;
+  //   var isHeroOnLeftSide = this.hero.x + this.hero.size / 2 < this.enemies.x + this.enemies.size / 2;
+  //   var isHeroOnRightSide = this.hero.x + this.hero.size / 2 > this.enemies.x + this.enemies.size / 2;
+  //   var isHeroAbove = this.hero.y + this.hero.size / 2 < this.enemies.y + this.enemies.size / 2;
+  //   var isHeroBelow = this.hero.y + this.hero.size / 2 > this.enemies.y + this.enemies.size / 2;
 
-    if(isHeroOnLeftSide) {
-      this.enemies.setDirection('left');
-    } 
-    if(isHeroOnRightSide) {
-      this.enemies.setDirection('right');
-    } 
-    if(isHeroAbove) {
-      this.enemies.setDirection('top');
-    } 
-    if(isHeroBelow) {
-      this.enemies.setDirection('down');
-    }
-  }
+  //   if(isHeroOnLeftSide) {
+  //     this.enemies.setDirection('left');
+  //   } 
+  //   if(isHeroOnRightSide) {
+  //     this.enemies.setDirection('right');
+  //   } 
+  //   if(isHeroAbove) {
+  //     this.enemies.setDirection('top');
+  //   } 
+  //   if(isHeroBelow) {
+  //     this.enemies.setDirection('down');
+  //   }
+  // }
 
   this._clearCanvas = function() {
     this.context.fillRect(0, 0, canvas.width, canvas.height);
