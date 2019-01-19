@@ -1,42 +1,19 @@
 'use strict';
 
-function Game(canvas) {
+function Game(canvas, gameOverHandler) {
   this.context = canvas.getContext('2d');
   this.hero = new Hero(canvas);
   this.enemies = new WhiteWalker(canvas);
   this.animation;
-  this.isGameOver;
+  this.gameOverHandler = gameOverHandler;
 
   this._update = function() {
 
     //check for hero position and adjust enemies direction accordingly
     this.enemies.followHero(this.hero);
     this.enemies.move();
-    if(this.hero.hasCollidedWithEnemy(this.enemies)) {
-      console.log('GAME OVER');
-    }
+    
   }
-
-  // this._adjustEnemiesDirection = function() {
-
-  //   var isHeroOnLeftSide = this.hero.x + this.hero.size / 2 < this.enemies.x + this.enemies.size / 2;
-  //   var isHeroOnRightSide = this.hero.x + this.hero.size / 2 > this.enemies.x + this.enemies.size / 2;
-  //   var isHeroAbove = this.hero.y + this.hero.size / 2 < this.enemies.y + this.enemies.size / 2;
-  //   var isHeroBelow = this.hero.y + this.hero.size / 2 > this.enemies.y + this.enemies.size / 2;
-
-  //   if(isHeroOnLeftSide) {
-  //     this.enemies.setDirection('left');
-  //   } 
-  //   if(isHeroOnRightSide) {
-  //     this.enemies.setDirection('right');
-  //   } 
-  //   if(isHeroAbove) {
-  //     this.enemies.setDirection('top');
-  //   } 
-  //   if(isHeroBelow) {
-  //     this.enemies.setDirection('down');
-  //   }
-  // }
 
   this._clearCanvas = function() {
     this.context.fillRect(0, 0, canvas.width, canvas.height);
@@ -56,6 +33,10 @@ Game.prototype.init = function() {
     this._update();
     
     // Check for collision
+    if(this.hero.hasCollidedWithEnemy(this.enemies)) {
+      this.gameOverHandler();
+      console.log('GAME OVER');
+    }
 
     // clear Canvas
     this._clearCanvas();
@@ -66,6 +47,10 @@ Game.prototype.init = function() {
     this.animation = window.requestAnimationFrame(loop.bind(this));
   }    
   loop.call(this); 
+}
+
+Game.prototype.stop = function() {
+  window.cancelAnimationFrame(this.animation);
 }
 
 Game.prototype.onKeyPress = function(direction, axis) {

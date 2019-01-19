@@ -9,29 +9,40 @@ var gameOverScreen = document.querySelector('.game-over-screen');
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
-var game = new Game(canvas);
 
-// game.init();
-function onKeyDown(event) {
-  switch(event.keyCode) {
-    case 68:
-    game.onKeyPress('right', 'x');
-    break;
-    case 65:
-    game.onKeyPress('left', 'x');
-    break;
-    case 87:
-    game.onKeyPress('up', 'y');
-    break;
-    case 83:
-    game.onKeyPress('down', 'y');
-    break;
-    default:
-    console.log('No key was pressed');
+function startGame() {
+
+  function gameOver() {
+    game.stop();
   }
+  
+  function onKeyDown(event) {
+    switch(event.keyCode) {
+      case 68:
+      game.onKeyPress('right', 'x');
+      break;
+      case 65:
+      game.onKeyPress('left', 'x');
+      break;
+      case 87:
+      game.onKeyPress('up', 'y');
+      break;
+      case 83:
+      game.onKeyPress('down', 'y');
+      break;
+      default:
+      console.log('No key was pressed');
+    }
+  }
+
+  var game = new Game(canvas, gameOver);
+  document.addEventListener('keydown', onKeyDown);
+  game.init();
 }
 
-document.addEventListener('keydown', onKeyDown);
+
+
+window.addEventListener('load', startGame);
 
 // function transitionBetweenScreens(toBeHidden, toBeDisplayed) {
 //   toBeHidden.classList.remove('displayed');
