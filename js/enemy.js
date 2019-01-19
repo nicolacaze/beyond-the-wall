@@ -5,10 +5,10 @@ function WhiteWalker(canvas) {
   this.context = canvas.getContext('2d');
   this.x = 200;
   this.y = 200;
-  this.directionX;
-  this.directionY;
+  this.directionX = 1;
+  this.directionY = 1;
   this.size;
-  this.speed = 5;
+  this.speed = 1;
   this.image = new Image();
 }
 

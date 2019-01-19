@@ -8,7 +8,7 @@ function Game(canvas) {
   this.isGameOver;
 
   this._update = function() {
-    // this.hero.move();
+    this.enemies.move('x');
   }
 
   this._clearCanvas = function() {
@@ -24,6 +24,7 @@ function Game(canvas) {
 
 Game.prototype.init = function() {
   function loop() {
+
     // update characters position
     this._update();
     
