@@ -27,8 +27,17 @@ Hero.prototype.setDirection = function(direction) {
     this.directionY = 1;
     break;
     default:
-    console.log('No direction change');
+    console.log('No direction change for Hero');
   }
+}
+
+Hero.prototype.hasCollidedWithEnemy = function(enemy) {
+  var collisionRight = this.x + this.size / 2 > enemy.x - enemy.size / 2;
+  var collisionLeft = this.x - this.size / 2 < enemy.x + enemy.size / 2;
+  var collisionTop = this.y - this.size / 2 < enemy.y + enemy.size / 2;
+  var collisionBottom = this.y + this.size / 2 > enemy.y - enemy.size / 2;
+
+  return collisionRight && collisionLeft && collisionTop && collisionBottom;
 }
 
 Hero.prototype.move = function(axis) {
