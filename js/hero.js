@@ -94,7 +94,7 @@ Hero.prototype.hasReachedLeft = function() {
 }
 
 Hero.prototype.hasReachedRight = function() {
-  if (this.x >= this.canvas.width - this.size) {
+  if (this.x + this.size / 2 >= this.canvas.width - this.size) {
     return true;
   } else {
     return false;
@@ -110,7 +110,7 @@ Hero.prototype.hasReachedTop = function() {
 }
 
 Hero.prototype.hasReachedBottom = function() {
-  if (this.y >= this.canvas.height - this.size) {
+  if (this.y + this.size / 2 >= this.canvas.height - this.size) {
     return true;
   } else {
     return false;
@@ -118,6 +118,6 @@ Hero.prototype.hasReachedBottom = function() {
 }
 
 Hero.prototype.draw = function() {
-  this.image.src = './assets/jon-snow-icon.png';
-  this.context.drawImage(this.image, this.x, this.y, this.size, this.size);
+  this.image.src = './assets/jon-snow.png';
+  this.context.drawImage(this.image, this.x, this.y);
 }

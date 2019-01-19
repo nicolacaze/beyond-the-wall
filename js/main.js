@@ -40,9 +40,10 @@ function startGame() {
   game.init();
 }
 
+// window.addEventListener('load', startGame);
 
 
-window.addEventListener('load', startGame);
+
 
 // function transitionBetweenScreens(toBeHidden, toBeDisplayed) {
 //   toBeHidden.classList.remove('displayed');

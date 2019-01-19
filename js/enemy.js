@@ -40,7 +40,7 @@ WhiteWalker.prototype.hasReachedLeft = function() {
 }
 
 WhiteWalker.prototype.hasReachedRight = function() {
-  if (this.x >= this.canvas.width - this.size) {
+  if (this.x + this.size / 2 >= this.canvas.width - this.size) {
     return true;
   } else {
     return false;
@@ -56,7 +56,7 @@ WhiteWalker.prototype.hasReachedTop = function() {
 }
 
 WhiteWalker.prototype.hasReachedBottom = function() {
-  if (this.y >= this.canvas.height - this.size) {
+  if (this.y + this.size / 2>= this.canvas.height - this.size) {
     return true;
   } else {
     return false;
