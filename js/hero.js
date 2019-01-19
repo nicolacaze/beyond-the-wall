@@ -9,7 +9,7 @@ function Hero(canvas) {
   this.directionY;
   this.size = 64;
   this.speed = 10;
-  this.image = new Image(this.size,this.size);
+  this.image = new Image();
 }
 
 Hero.prototype.setDirection = function(direction) {
@@ -109,5 +109,5 @@ Hero.prototype.hasReachedBottom = function() {
 
 Hero.prototype.draw = function() {
   this.image.src = './assets/jon-snow-icon.png';
-  this.context.drawImage(this.image, this.x, this.y);
+  this.context.drawImage(this.image, this.x, this.y, this.size, this.size);
 }
