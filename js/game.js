@@ -12,19 +12,28 @@ function Game(canvas) {
     //check for hero position and adjust enemies direction accordingly
     this._adjustEnemiesDirection();
     this.enemies.move();
+    if(this.hero.hasCollidedWithEnemy(this.enemies)) {
+      console.log('GAME OVER');
+    }
   }
 
   this._adjustEnemiesDirection = function() {
-    if(this.hero.x < this.enemies.x) {
+    
+    var isHeroOnLeftSide = this.hero.x - this.hero.size / 2 < this.enemmies.x + this.enemies.size / 2;
+    var isHeroOnRightSide = this.hero.x + this.hero.size / 2 > this.enemies.x - this.enemies.size / 2;
+    var isHeroAbove = this.hero.y + this.hero.size / 2 < this.enemies.y - this.enemies.size / 2;
+    var isHeroBelow = this.hero.y - this.hero.size / 2 < this.enemies.y + this.enemies.size / 2;
+
+    if(isHeroOnLeftSide) {
       this.enemies.setDirection('left');
     } 
-    if(this.hero.x > this.enemies.x) {
+    if(isHeroOnRightSide) {
       this.enemies.setDirection('right');
     } 
-    if(this.hero.y < this.enemies.y) {
+    if(isHeroAbove) {
       this.enemies.setDirection('top');
     } 
-    if(this.hero.y > this.enemies.y) {
+    if(isHeroBelow) {
       this.enemies.setDirection('down');
     }
   }
