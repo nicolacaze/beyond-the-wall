@@ -8,7 +8,7 @@ function Hero(canvas) {
   this.directionX;
   this.directionY;
   this.size = 64;
-  this.speed = 10;
+  this.speed = 15;
   this.image = new Image();
 }
 
@@ -32,7 +32,15 @@ Hero.prototype.setDirection = function(direction) {
 }
 
 Hero.prototype.move = function(axis) {
+  this.checkForEdges();
+  if(axis === 'x') {
+    this.x += this.directionX * this.speed;
+  } else if(axis === 'y') {
+    this.y += this.directionY * this.speed;
+  } 
+}
 
+Hero.prototype.checkForEdges = function() {
   if(this.hasReachedLeft()) {
     this.bounceOnEdges('left');
   } else if(this.hasReachedRight()) {
@@ -41,14 +49,7 @@ Hero.prototype.move = function(axis) {
     this.bounceOnEdges('top');
   } else if(this.hasReachedBottom()) {
     this.bounceOnEdges('bottom');
-  } else {
-
-    if(axis === 'x') {
-      this.x += this.directionX * this.speed;
-    } else if(axis === 'y') {
-      this.y += this.directionY * this.speed;
-    } 
-  } 
+  }
 }
 
 Hero.prototype.bounceOnEdges = function(side) {
