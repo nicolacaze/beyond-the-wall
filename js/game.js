@@ -10,6 +10,11 @@ function Game(canvas) {
   this._update = function() {
 
     //check for hero position and adjust enemies direction accordingly
+    this._adjustEnemiesDirection();
+    this.enemies.move();
+  }
+
+  this._adjustEnemiesDirection = function() {
     if(this.hero.x < this.enemies.x) {
       this.enemies.setDirection('left');
     } 
@@ -22,7 +27,6 @@ function Game(canvas) {
     if(this.hero.y > this.enemies.y) {
       this.enemies.setDirection('down');
     }
-    this.enemies.move();
   }
 
   this._clearCanvas = function() {
