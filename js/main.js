@@ -15,16 +15,16 @@ var game = new Game(canvas);
 function onKeyDown(event) {
   switch(event.keyCode) {
     case 68:
-    game.keyRight();
+    game.onKeyPress('right', 'x');
     break;
     case 65:
-    game.keyLeft();
+    game.onKeyPress('left', 'x');
     break;
     case 87:
-    game.keyUp();
+    game.onKeyPress('up', 'y');
     break;
     case 83:
-    game.keyDown();
+    game.onKeyPress('down', 'y');
     break;
     default:
     console.log('No key was pressed');

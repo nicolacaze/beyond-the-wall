@@ -40,23 +40,8 @@ Game.prototype.init = function() {
 
 }
 
-Game.prototype.keyRight = function() {
-  this.hero.setDirection('right');
-  this.hero.move('x');
-}
-
-Game.prototype.keyLeft = function() {
-  this.hero.setDirection('left');
-  this.hero.move('x');
-}
-
-Game.prototype.keyUp = function() {
-  this.hero.setDirection('up');
-  this.hero.move('y');
-}
-
-Game.prototype.keyDown = function() {
-  this.hero.setDirection('down');
-  this.hero.move('y');
+Game.prototype.onKeyPress = function(direction, axis) {
+  this.hero.setDirection(direction);
+  this.hero.move(axis);
 }
 
