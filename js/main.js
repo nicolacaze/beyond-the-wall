@@ -39,7 +39,6 @@ function startGame() {
   document.addEventListener('keydown', onKeyDown);
   game.init();
 }
-
 // window.addEventListener('load', startGame);
 
 

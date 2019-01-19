@@ -4,6 +4,7 @@ function Game(canvas, gameOverHandler) {
   this.context = canvas.getContext('2d');
   this.hero = new Hero(canvas);
   this.enemies = new WhiteWalker(canvas);
+  this.map = new Map(canvas);
   this.animation;
   this.gameOverHandler = gameOverHandler;
 
@@ -21,6 +22,7 @@ function Game(canvas, gameOverHandler) {
   }
 
   this._render = function() {
+    this.map.drawMap();
     this.hero.draw();
     this.enemies.draw();
   }
