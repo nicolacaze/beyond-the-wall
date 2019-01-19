@@ -3,8 +3,8 @@
 function WhiteWalker(canvas) {
   this.canvas = canvas;
   this.context = canvas.getContext('2d');
-  this.x = 200;
-  this.y = 200;
+  this.x = 300;
+  this.y = 300;
   this.directionX = 1;
   this.directionY = 1;
   this.size = 64;
@@ -89,7 +89,7 @@ WhiteWalker.prototype.followHero = function(hero) {
     this.setDirection('right');
   } 
   if(isHeroAbove) {
-    this.setDirection('top');
+    this.setDirection('up');
   } 
   if(isHeroBelow) {
     this.setDirection('down');
@@ -98,6 +98,7 @@ WhiteWalker.prototype.followHero = function(hero) {
 
 WhiteWalker.prototype.move = function() {
   this.checkForEdges();
+  
   this.x += this.directionX * this.speed;
   this.y += this.directionY * this.speed;
 }
