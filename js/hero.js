@@ -7,9 +7,10 @@ function Hero(canvas) {
   this.y = 100;
   this.directionX;
   this.directionY;
-  this.size = 64;
   this.speed = 15;
-  this.image = new Image();
+  this.image = new Image(50, 64);
+  this.width = this.image.width;
+  this.height = this.image.height;
 }
 
 Hero.prototype.setDirection = function(direction) {
@@ -32,10 +33,10 @@ Hero.prototype.setDirection = function(direction) {
 }
 
 Hero.prototype.hasCollidedWithEnemy = function(enemy) {
-  var collisionRight = this.x + this.size / 2 > enemy.x - enemy.size / 2;
-  var collisionLeft = this.x - this.size / 2 < enemy.x + enemy.size / 2;
-  var collisionTop = this.y - this.size / 2 < enemy.y + enemy.size / 2;
-  var collisionBottom = this.y + this.size / 2 > enemy.y - enemy.size / 2;
+  var collisionRight = this.x + this.width / 2 > enemy.x - enemy.width / 2;
+  var collisionLeft = this.x - this.width / 2 < enemy.x + enemy.width / 2;
+  var collisionTop = this.y - this.height / 2 < enemy.y + enemy.height / 2;
+  var collisionBottom = this.y + this.height / 2 > enemy.y - enemy.height / 2;
 
   return collisionRight && collisionLeft && collisionTop && collisionBottom;
 }
@@ -94,7 +95,7 @@ Hero.prototype.hasReachedLeft = function() {
 }
 
 Hero.prototype.hasReachedRight = function() {
-  if (this.x + this.size / 2 >= this.canvas.width - this.size) {
+  if (this.x >= this.canvas.width - this.width) {
     return true;
   } else {
     return false;
@@ -110,7 +111,7 @@ Hero.prototype.hasReachedTop = function() {
 }
 
 Hero.prototype.hasReachedBottom = function() {
-  if (this.y + this.size / 2 >= this.canvas.height - this.size) {
+  if (this.y >= this.canvas.height - this.height) {
     return true;
   } else {
     return false;

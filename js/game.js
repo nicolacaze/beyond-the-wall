@@ -9,13 +9,13 @@ function Game(canvas, gameOverHandler) {
   this.gameOverHandler = gameOverHandler;
 
   this._generateEnemy = function() {
-    var randomPositionX = Math.floor(Math.random() * canvas.width);
-    var randomPositionY = Math.floor(Math.random() * canvas.height);
+    // Enemy should not appear on the border
+    var randomPositionX = Math.random() * (canvas.width - this.map.map.tsize);
+    var randomPositionY = Math.random() * (canvas.height - this.map.map.tsize);
     this.enemies.push(new WhiteWalker(canvas, randomPositionX, randomPositionY));
   }
 
   this._updateGame = function() {
-    
     this.enemies.forEach(function(enemy, index, array) {
       //The last enemy created should wait for 3 seconds before chasing hero
       if(index === array.length - 1) {
@@ -71,7 +71,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 10000);
+  }.bind(this), 5000);
 
   loop.call(this); 
 }

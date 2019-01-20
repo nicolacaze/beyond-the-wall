@@ -7,9 +7,10 @@ function WhiteWalker(canvas, x, y) {
   this.y = y;
   this.directionX = 1;
   this.directionY = 1;
-  this.size = 64;
-  this.speed = 1;
-  this.image = new Image();
+  this.speed = 0.5;
+  this.image = new Image(45, 64);
+  this.width = this.image.width;
+  this.height = this.image.height;
 }
 
 WhiteWalker.prototype.setDirection = function(direction) {
@@ -40,7 +41,7 @@ WhiteWalker.prototype.hasReachedLeft = function() {
 }
 
 WhiteWalker.prototype.hasReachedRight = function() {
-  if (this.x + this.size / 2 >= this.canvas.width - this.size) {
+  if (this.x + this.width / 2 >= this.canvas.width - this.width) {
     return true;
   } else {
     return false;
@@ -56,7 +57,7 @@ WhiteWalker.prototype.hasReachedTop = function() {
 }
 
 WhiteWalker.prototype.hasReachedBottom = function() {
-  if (this.y + this.size / 2>= this.canvas.height - this.size) {
+  if (this.y + this.height / 2>= this.canvas.height - this.height) {
     return true;
   } else {
     return false;
@@ -77,10 +78,10 @@ WhiteWalker.prototype.checkForEdges = function() {
 
 WhiteWalker.prototype.followHero = function(hero) {
 
-  var isHeroOnLeftSide = hero.x + hero.size / 2 < this.x + this.size / 2;
-  var isHeroOnRightSide = hero.x + hero.size / 2 > this.x + this.size / 2;
-  var isHeroAbove = hero.y + hero.size / 2 < this.y + this.size / 2;
-  var isHeroBelow = hero.y + hero.size / 2 > this.y + this.size / 2;
+  var isHeroOnLeftSide = hero.x + hero.width / 2 < this.x + this.width / 2;
+  var isHeroOnRightSide = hero.x + hero.width / 2 > this.x + this.width / 2;
+  var isHeroAbove = hero.y + hero.height / 2 < this.y + this.height / 2;
+  var isHeroBelow = hero.y + hero.height / 2 > this.y + this.height / 2;
 
   if(isHeroOnLeftSide) {
     this.setDirection('left');

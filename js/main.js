@@ -11,10 +11,10 @@ var context = canvas.getContext('2d');
 
 
 function startGame() {
-
-  function gameOver() {
+  
+  var gameOver = function() {
     game.stop();
-  }
+  };
   
   function onKeyDown(event) {
     switch(event.keyCode) {
@@ -34,7 +34,7 @@ function startGame() {
       console.log('No key was pressed');
     }
   }
-
+  
   var game = new Game(canvas, gameOver);
   document.addEventListener('keydown', onKeyDown);
   game.init();
