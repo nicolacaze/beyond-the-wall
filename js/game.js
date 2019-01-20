@@ -3,16 +3,28 @@
 function Game(canvas, gameOverHandler) {
   this.context = canvas.getContext('2d');
   this.hero = new Hero(canvas);
-  this.enemies = new WhiteWalker(canvas);
+  this.enemies = [];
   this.map = new Map(canvas);
   this.animation;
   this.gameOverHandler = gameOverHandler;
 
-  this._update = function() {
+  this._generateEnemy = function() {
+    var randomPositionX = Math.floor(Math.random() * canvas.width);
+    var randomPositionY = Math.floor(Math.random() * canvas.height);
 
-    //check for hero position and adjust enemies direction accordingly
-    this.enemies.followHero(this.hero);
-    this.enemies.move(this.hero);
+    this.enemies.push(new WhiteWalker(canvas, randomPositionX, randomPositionY));
+  }
+
+  this._updateGame = function() {
+
+
+    this.enemies.forEach(function(enemy) {
+
+      //check for hero position and adjust enemies direction accordingly
+      enemy.followHero(this.hero);
+      enemy.move(this.hero);
+    }.bind(this));
+
     
   }
 
@@ -21,10 +33,12 @@ function Game(canvas, gameOverHandler) {
     
   }
 
-  this._render = function() {
+  this._renderGame = function() {
     this.map.drawMap();
     this.hero.draw();
-    this.enemies.draw();
+    this.enemies.forEach(function(enemy) {
+      enemy.draw();
+    });
   }
 }
 
@@ -32,7 +46,7 @@ Game.prototype.init = function() {
   function loop() {
 
     // update characters position
-    this._update();
+    this._updateGame();
     
     // Check for collision
     if(this.hero.hasCollidedWithEnemy(this.enemies)) {
@@ -44,10 +58,15 @@ Game.prototype.init = function() {
     this._clearCanvas();
 
     // render new canvas
-    this._render();
+    this._renderGame();
 
     this.animation = window.requestAnimationFrame(loop.bind(this));
   }    
+  // Generate a new Enemy every 10 seconds
+  setInterval(function() {
+    this._generateEnemy();
+  }.bind(this), 10000);
+
   loop.call(this); 
 }
 

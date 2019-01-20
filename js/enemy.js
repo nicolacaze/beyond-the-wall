@@ -1,10 +1,10 @@
 'use strict';
 
-function WhiteWalker(canvas) {
+function WhiteWalker(canvas, x, y) {
   this.canvas = canvas;
   this.context = canvas.getContext('2d');
-  this.x = 300;
-  this.y = 300;
+  this.x = x;
+  this.y = y;
   this.directionX = 1;
   this.directionY = 1;
   this.size = 64;
