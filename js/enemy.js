@@ -96,11 +96,18 @@ WhiteWalker.prototype.followHero = function(hero) {
   }
 }
 
-WhiteWalker.prototype.move = function() {
+WhiteWalker.prototype.move = function(hero) {
   this.checkForEdges();
-  
-  this.x += this.directionX * this.speed;
-  this.y += this.directionY * this.speed;
+  // Need to change logic so that WW walks straight 
+  // when on same X or Y axis. No shivering effect.
+  if(hero.x === this.x) {
+    this.y += this.directionY * this.speed; 
+  } else if(hero.y === this.y) {
+    this.x += this.directionX * this.speed;
+  } else {
+    this.x += this.directionX * this.speed;
+    this.y += this.directionY * this.speed;
+  }
 }
 
 WhiteWalker.prototype.draw = function() {

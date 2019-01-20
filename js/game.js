@@ -12,7 +12,7 @@ function Game(canvas, gameOverHandler) {
 
     //check for hero position and adjust enemies direction accordingly
     this.enemies.followHero(this.hero);
-    this.enemies.move();
+    this.enemies.move(this.hero);
     
   }
 
