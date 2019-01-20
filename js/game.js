@@ -11,26 +11,29 @@ function Game(canvas, gameOverHandler) {
   this._generateEnemy = function() {
     var randomPositionX = Math.floor(Math.random() * canvas.width);
     var randomPositionY = Math.floor(Math.random() * canvas.height);
-
     this.enemies.push(new WhiteWalker(canvas, randomPositionX, randomPositionY));
   }
 
   this._updateGame = function() {
-
-
-    this.enemies.forEach(function(enemy) {
-
-      //check for hero position and adjust enemies direction accordingly
-      enemy.followHero(this.hero);
-      enemy.move(this.hero);
-    }.bind(this));
-
     
+    this.enemies.forEach(function(enemy, index, array) {
+      //The last enemy created should wait for 3 seconds before chasing hero
+      if(index === array.length - 1) {
+        // Enemy should animate before it moves
+        setTimeout(function() {
+          enemy.followHero(this.hero);
+          enemy.move(this.hero);
+        }.bind(this), 3000);
+      } else {
+        //check for hero position and adjust enemies direction accordingly
+        enemy.followHero(this.hero);
+        enemy.move(this.hero);
+      }
+    }.bind(this));
   }
 
   this._clearCanvas = function() {
     this.context.fillRect(0, 0, canvas.width, canvas.height);
-    
   }
 
   this._renderGame = function() {
@@ -49,10 +52,13 @@ Game.prototype.init = function() {
     this._updateGame();
     
     // Check for collision
-    if(this.hero.hasCollidedWithEnemy(this.enemies)) {
-      this.gameOverHandler();
-      console.log('GAME OVER');
-    }
+    this.enemies.forEach(function(enemy) {
+
+      if(this.hero.hasCollidedWithEnemy(enemy)) {
+        this.gameOverHandler();
+        console.log('GAME OVER');
+      }
+    }.bind(this));
 
     // clear Canvas
     this._clearCanvas();

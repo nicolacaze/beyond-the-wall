@@ -98,8 +98,7 @@ WhiteWalker.prototype.followHero = function(hero) {
 
 WhiteWalker.prototype.move = function(hero) {
   this.checkForEdges();
-  // Need to change logic so that WW walks straight 
-  // when on same X or Y axis. No shivering effect.
+  // Cancel shaking effect when walks straight
   if(hero.x === this.x) {
     this.y += this.directionY * this.speed; 
   } else if(hero.y === this.y) {
