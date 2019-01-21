@@ -24,19 +24,22 @@
   </div> -->
 
   <!-- Here starts the game screen -->
-  <div class="game-screen hidden displayed"> 
+  <div class="game-screen displayed"> 
     <div class="player-status-card">
       <p>Jon Snow</p>
     </div>
-    <canvas id="canvas" width="1024" height="576"></canvas>
+    <div>
+      <div>Winter is coming <span id="time">00:30</span></div>
+      <canvas id="canvas" width="1024" height="576"></canvas>
+    </div>
   </div> 
 
   <!-- Here starts the game over screen -->
-  <!-- <div class="screen game-over-screen hidden">
+  <div class="screen game-over-screen hidden">
     <img src="assets/jon-snow-icon.png" alt="jon-snow-icon">
-    <p>Congrats! You survived.</p>
+    <p></p>
     <button>Play Again</button>
-  </div>  -->
+  </div> 
   <script src="js/map.js"></script>
   <script src="js/enemy.js"></script>
   <script src="js/hero.js"></script>

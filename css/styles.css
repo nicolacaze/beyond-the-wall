@@ -80,9 +80,9 @@ p {
   display: flex;
 }
 
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
 
 .character-selection {
   display: flex;
@@ -146,4 +146,8 @@ p {
   color: #000;
   padding: 1rem 1rem;
   margin-bottom: 2rem;
+}
+
+.player-status-card + div {
+  color: #fff;
 }
