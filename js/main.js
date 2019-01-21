@@ -1,13 +1,13 @@
 'use strict';
 
-var playBtn = document.querySelector('.screen button');
-var splashScreen = document.querySelector('.screen');
-var gameScreen = document.querySelector('.game-screen');
-var statusCard = document.querySelector('.player-status-card');
-var playAgainBtn = document.querySelector('.game-over-screen button');
+var playBtn        = document.querySelector('.screen button');
+var splashScreen   = document.querySelector('.screen');
+var gameScreen     = document.querySelector('.game-screen');
+var statusCard     = document.querySelector('.player-status-card');
+var playAgainBtn   = document.querySelector('.game-over-screen button');
 var gameOverScreen = document.querySelector('.game-over-screen');
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
+var canvas         = document.getElementById('canvas');
+var context        = canvas.getContext('2d');
 
 
 function startGame() {

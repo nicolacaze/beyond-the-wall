@@ -12,24 +12,41 @@ function Map(canvas) {
     tiles: [
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
-      1, 3, 4, 2, 2, 3, 3, 3, 2, 3, 3, 3, 3, 2, 3, 1,
-      1, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 2, 3, 2, 3, 1,
-      1, 3, 2, 2, 3, 5, 5, 3, 3, 2, 3, 3, 4, 3, 3, 1,
-      1, 3, 2, 3, 3, 3, 3, 3, 3, 2, 3, 2, 3, 3, 3, 1,
-      1, 3, 3, 3, 3, 2, 3, 2, 3, 2, 3, 3, 2, 2, 3, 1,
-      1, 3, 3, 2, 3, 2, 3, 3, 4, 3, 3, 3, 5, 5, 3, 1,
+      1, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
+      1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
+      1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 1,
+      1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
+      1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
+      1, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     ],
   };
-  this._getTile = function(col, row) {
-    return this.map.tiles[row * this.map.cols + col]
-  }
+}
+Map.prototype.getTile = function(col, row) {
+  return this.map.tiles[row * this.map.cols + col]
+}
+
+Map.prototype.isSolidTileAtXY = function (x, y) {
+  // Convert x, y position to a tile position on map
+  var col = Math.floor(x / this.map.tsize);
+  var row = Math.floor(y / this.map.tsize);
+
+  // tiles 1, 2, 4 and 5 are solid -- the rest are walkable
+  // loop through all layers and return TRUE if any tile is solid
+  return this.map.tiles.reduce(function (res, layer) {
+      var tile = this.getTile(col, row);
+      var isSolid = tile === 1 
+      || tile === 2
+      || tile === 4
+      || tile === 5;
+      return res || isSolid;
+  }.bind(this), false);
 }
 
 Map.prototype.drawMap = function () {
   for (var c = 0; c < this.map.cols; c++) {
     for (var r = 0; r < this.map.rows; r++) {
-      var tile = this._getTile(c, r);
+      var tile = this.getTile(c, r);
       if (tile !== 0) { // 0 => empty tile
         this.context.drawImage(
           this.atlasImage, // image

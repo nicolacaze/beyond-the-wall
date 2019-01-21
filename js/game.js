@@ -47,6 +47,7 @@ function Game(canvas, gameOverHandler) {
 
 Game.prototype.init = function() {
   function loop() {
+    this.animation = window.requestAnimationFrame(loop.bind(this));
 
     // update characters position
     this._updateGame();
@@ -56,7 +57,6 @@ Game.prototype.init = function() {
 
       if(this.hero.hasCollidedWithEnemy(enemy)) {
         this.gameOverHandler();
-        console.log('GAME OVER');
       }
     }.bind(this));
 
@@ -66,7 +66,6 @@ Game.prototype.init = function() {
     // render new canvas
     this._renderGame();
 
-    this.animation = window.requestAnimationFrame(loop.bind(this));
   }    
   // Generate a new Enemy every 10 seconds
   setInterval(function() {
@@ -82,6 +81,9 @@ Game.prototype.stop = function() {
 
 Game.prototype.onKeyPress = function(direction, axis) {
   this.hero.setDirection(direction);
-  this.hero.move(axis);
+  console.log(this.hero.checkForObstacle(this.map));
+  if(!this.hero.checkForObstacle(this.map)) {
+    this.hero.move(axis);
+  }
 }
 

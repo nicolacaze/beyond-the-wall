@@ -3,11 +3,11 @@
 function Hero(canvas) {
   this.canvas = canvas;
   this.context = canvas.getContext('2d');
-  this.x = 100;
-  this.y = 100;
+  this.x = 66;
+  this.y = 66;
   this.directionX;
   this.directionY;
-  this.speed = 15;
+  this.speed = 5;
   this.image = new Image(50, 64);
   this.width = this.image.width;
   this.height = this.image.height;
@@ -50,6 +50,22 @@ Hero.prototype.move = function(axis) {
   } 
 }
 
+Hero.prototype.checkForObstacle = function(map) {
+
+  var left = this.x;
+  var right = this.x + this.width;
+  var top = this.y;
+  var bottom = this.y + this.height;
+
+  var collision = 
+    map.isSolidTileAtXY(left,top) ||
+    map.isSolidTileAtXY(right, top) ||
+    map.isSolidTileAtXY(right, bottom) ||
+    map.isSolidTileAtXY(left, bottom);
+
+    return collision;
+}
+
 Hero.prototype.checkForEdges = function() {
   if(this.hasReachedLeft()) {
     this.bounceOnEdges('left');
@@ -87,7 +103,7 @@ Hero.prototype.bounceOnEdges = function(side) {
 }
 
 Hero.prototype.hasReachedLeft = function() {
-  if(this.x <= 0) {
+  if(this.x <= this.width) {
     return true;
   } else {
     return false;
@@ -95,7 +111,7 @@ Hero.prototype.hasReachedLeft = function() {
 }
 
 Hero.prototype.hasReachedRight = function() {
-  if (this.x >= this.canvas.width - this.width) {
+  if (this.x >= this.canvas.width) {
     return true;
   } else {
     return false;
@@ -103,7 +119,7 @@ Hero.prototype.hasReachedRight = function() {
 }
 
 Hero.prototype.hasReachedTop = function() {
-  if (this.y <= 0) {
+  if (this.y <= this.height) {
     return true;
   } else {
     return false;
@@ -111,7 +127,7 @@ Hero.prototype.hasReachedTop = function() {
 }
 
 Hero.prototype.hasReachedBottom = function() {
-  if (this.y >= this.canvas.height - this.height) {
+  if (this.y >= this.canvas.height) {
     return true;
   } else {
     return false;
