@@ -43,10 +43,16 @@ Classes and methods definition.
   
   ```javascript
   Game(canvas) {
-    this.ctx;
+    this.context;
     this.hero;
     this.enemies;
-    this.isGameOver;
+    this.map;
+    this.animation;
+    this.gameOverHandler;
+    this._generateEnemy()
+    this._updateGame() 
+    this._clearCanvas() 
+    this._renderGame() 
   }
 
   Game.prototype.init() {
@@ -68,12 +74,9 @@ Classes and methods definition.
     Frame(loop)  
   }
 
-  Game.prototype.update();
-  Game.prototype.render() {
-    map.draw();
-    hero.draw();
-    enemies.draw();
-  }  
+  Game.prototype.update()
+  Game.prototype.render() 
+  Game.prototype.onKeyPress()
   ```
    
    map.js
@@ -85,41 +88,64 @@ Classes and methods definition.
    this.getTile()
    }
    
-   Map.prototype.draw()
+   Map.prototype.isSolidTileAtXY()
+   Map.prototype.drawMap()
    ```
    
    hero.js
    
    ```javascript
    Hero(canvas) {
-   this.ctx
-   this.x
-   this.y
-   this.directionX
-   this.directionY
-   this.speed
+    this.canvas
+    this.context
+    this.x
+    this.y
+    this.directionX
+    this.directionY
+    this.speed
+    this.image
+    this.width
+    this.heigh
    }
    
    Hero.prototype.setDirection()
-   Hero.prototype.move()    
+   Hero.prototype.hasCollidedWithEnemy()
+   Hero.prototype.move()
+   Hero.prototype.checkForObstacle()
+   Hero.prototype.checkForEdges()
+   Hero.prototype.bounceOnEdges()
+   Hero.prototype.hasReachedLeft()
+   Hero.prototype.hasReachedRight()
+   Hero.prototype.hasReachedTop()
+   Hero.prototype.hasReachedBottom()
    Hero.prototype.draw()
    ```
    
    enemy.js
    
    ```javascript
-   Enemy(canvas) {
-   this.ctx
-   this.x
-   this.y
-   this.directionX
-   this.directionY
-   this.speed
+   WhiteWalker(canvas) {
+    this.canvas
+    this.context
+    this.x
+    this.y
+    this.directionX
+    this.directionY
+    this.speed
+    this.image
+    this.width
+    this.heigh
    }
    
-   Enemy.prototype.setDirection()
-   Enemy.prototype.move()    
-   Enemy.prototype.draw()
+   WhiteWalker.prototype.setDirection()
+   WhiteWalker.prototype.hasReachedLeft()
+   WhiteWalker.prototype.hasReachedRight()
+   WhiteWalker.prototype.hasReachedTop()
+   WhiteWalker.prototype.hasReachedBottom()
+   WhiteWalker.prototype.checkForEdges()
+   WhiteWalker.prototype.followHero()
+   WhiteWalker.prototype.move(
+   WhiteWalker.prototype.draw()
    ```
 
   
