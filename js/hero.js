@@ -7,8 +7,9 @@ function Hero(canvas) {
   this.y = 66;
   this.directionX;
   this.directionY;
-  this.speed = 5;
+  this.speed = 10;
   this.image = new Image(50, 64);
+  this.map = new Map(canvas);
   this.width = this.image.width;
   this.height = this.image.height;
 }
@@ -43,6 +44,7 @@ Hero.prototype.hasCollidedWithEnemy = function(enemy) {
 
 Hero.prototype.move = function(axis) {
   this.checkForEdges();
+  this.checkForObstacle(this.map);
   if(axis === 'x') {
     this.x += this.directionX * this.speed;
   } else if(axis === 'y') {
@@ -51,7 +53,7 @@ Hero.prototype.move = function(axis) {
 }
 
 Hero.prototype.checkForObstacle = function(map) {
-
+  
   var left = this.x;
   var right = this.x + this.width;
   var top = this.y;
@@ -63,6 +65,20 @@ Hero.prototype.checkForObstacle = function(map) {
     map.isSolidTileAtXY(right, bottom) ||
     map.isSolidTileAtXY(left, bottom);
 
+  if (!collision) { return; }
+
+  if (this.directionY > 0) {
+    console.log(this.x, this.y);
+    this.bounceOnEdges('bottom');
+  } else if (this.directionY < 0) {
+    this.bounceOnEdges('top');
+  } 
+  if (this.directionX > 0) {
+    this.bounceOnEdges('right');
+  } 
+  else if (this.directionX < 0) {
+    this.bounceOnEdges('left');
+  }
     return collision;
 }
 

@@ -37,7 +37,7 @@ function Game(canvas, gameOverHandler) {
   }
 
   this._renderGame = function() {
-    // this.map.drawMap();
+    this.map.drawMap();
     this.hero.draw();
     this.enemies.forEach(function(enemy) {
       enemy.draw();
@@ -70,7 +70,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   setInterval(function() {
     // this._generateEnemy();
-  }.bind(this), 5000);
+  }.bind(this), 10000);
 
   loop.call(this); 
 }
@@ -82,8 +82,6 @@ Game.prototype.stop = function() {
 Game.prototype.onKeyPress = function(direction, axis) {
   this.hero.setDirection(direction);
   console.log(this.hero.checkForObstacle(this.map));
-  if(!this.hero.checkForObstacle(this.map)) {
-    this.hero.move(axis);
-  }
+  this.hero.move(axis);
 }
 

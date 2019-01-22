@@ -53,7 +53,7 @@ function startGame() {
   }
 
   var game = new Game(canvas, gameOver);
-  startTimer(gameDuration, timeDisplay, gameSuccess);
+  // startTimer(gameDuration, timeDisplay, gameSuccess);
   game.init();
 
   document.addEventListener('keydown', onKeyDown);

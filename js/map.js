@@ -12,8 +12,8 @@ function Map(canvas) {
     tiles: [
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
-      1, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
       1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
+      1, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
       1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 1,
       1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
       1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
@@ -25,7 +25,18 @@ function Map(canvas) {
 Map.prototype.getTile = function(col, row) {
   return this.map.tiles[row * this.map.cols + col]
 }
-
+Map.prototype.getCol = function (x) {
+  return Math.floor(x / this.tsize);
+}
+Map.prototype.getRow = function (y) {
+  return Math.floor(y / this.tsize);
+}
+Map.prototype.getX = function (col) {
+  return col * this.tsize;
+}
+Map.prototype.getY = function (row) {
+  return row * this.tsize;
+}
 Map.prototype.isSolidTileAtXY = function (x, y) {
   // Convert x, y position to a tile position on map
   var col = Math.floor(x / this.map.tsize);
