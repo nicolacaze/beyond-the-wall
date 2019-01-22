@@ -73,6 +73,8 @@ Map.prototype.generateRandomMap = function() {
 
   // Fill the rest of the map randomly with obstacles and free space
   this.map.tiles.forEach(function(tile, i, arr){
+    // Ensure first tile of our map is free for our Hero
+    arr[17] === 3;
     if (tile === 0) {
       var random = Math.random();
       // With 10% chance put an  tree obstacle
