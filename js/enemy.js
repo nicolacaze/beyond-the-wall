@@ -79,35 +79,47 @@ WhiteWalker.prototype.checkForEdges = function() {
 
 WhiteWalker.prototype.checkForObstacle = function(map) {
   
-  var left = this.x;
-  var right = this.x + this.width;
-  var top = this.y;
-  var bottom = this.y + this.height;
+ // Make collision happen on border of draw and not his box element
+  var left = this.x  + this.width / 4;
+  var right = this.x + this.width * 3 / 4;
+  var top = this.y + this.height / 4;
+  var bottom = this.y + this.height * 3 / 4;
 
-  var collision = 
-    map.isSolidTileAtXY(left,top) ||
-    map.isSolidTileAtXY(right, top) ||
-    map.isSolidTileAtXY(right, bottom) ||
-    map.isSolidTileAtXY(left, bottom);
+  var collisionTopLeft = map.isSolidTileAtXY(left,top);
+  var collisionTopRight = map.isSolidTileAtXY(right, top);
+  var collisionBottomRight = map.isSolidTileAtXY(right, bottom);
+  var collisionBottomLeft =  map.isSolidTileAtXY(left, bottom);
 
-  if (!collision) { return; }
+  if (!collisionTopLeft 
+      && !collisionTopRight
+      && !collisionBottomLeft 
+      && !collisionBottomRight) { 
+      return; }
 
-  if (this.directionY > 0) {
-    this.x -= this.directionX * this.speed;
-    this.y -= this.directionY * this.speed;
-  } else if (this.directionY < 0) {
-    this.x -= this.directionX * this.speed;
-    this.y -= this.directionY * this.speed;
+  if (collisionTopLeft) {
+    this.setDirection('right');
+    this.x += this.directionX * this.speed;
+    this.setDirection('down');
+    this.y += this.directionY * this.speed;
   } 
-  if (this.directionX > 0) {
-    this.x -= this.directionX * this.speed;
-    this.y -= this.directionY * this.speed;
+  if (collisionTopRight) {
+    this.setDirection('left');
+    this.x += this.directionX * this.speed;
+    this.setDirection('down');
+    this.y += this.directionY * this.speed;
   } 
-  else if (this.directionX < 0) {
-    this.x -= this.directionX * this.speed;
-    this.y -= this.directionY * this.speed;
+  if (collisionBottomLeft) {
+    this.setDirection('right');
+    this.x += this.directionX * this.speed;
+    this.setDirection('up');
+    this.y += this.directionY * this.speed;
+  } 
+  if (collisionBottomRight) {
+    this.setDirection('left');
+    this.x += this.directionX * this.speed;
+    this.setDirection('up');
+    this.y += this.directionY * this.speed;
   }
-    return collision;
 }
 
 WhiteWalker.prototype.followHero = function(hero) {
