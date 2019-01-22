@@ -1,6 +1,6 @@
 'use strict';
 
-function Hero(canvas) {
+function Hero(canvas, map) {
   this.canvas = canvas;
   this.context = canvas.getContext('2d');
   this.x = 66;
@@ -9,7 +9,7 @@ function Hero(canvas) {
   this.directionY;
   this.speed = 10;
   this.image = new Image(50, 64);
-  this.map = new Map(canvas);
+  this.map = map;
   this.width = this.image.width;
   this.height = this.image.height;
 }
@@ -54,10 +54,11 @@ Hero.prototype.move = function(axis) {
 
 Hero.prototype.checkForObstacle = function(map) {
   
-  var left = this.x;
-  var right = this.x + this.width;
-  var top = this.y;
-  var bottom = this.y + this.height;
+  // Make collision happen on border of draw and not his box element
+  var left = this.x  + this.width / 4;
+  var right = this.x + this.width * 3 / 4;
+  var top = this.y + this.height / 4;
+  var bottom = this.y + this.height * 3 / 4;
 
   var collision = 
     map.isSolidTileAtXY(left,top) ||
@@ -68,15 +69,13 @@ Hero.prototype.checkForObstacle = function(map) {
   if (!collision) { return; }
 
   if (this.directionY > 0) {
-    console.log(this.x, this.y);
     this.bounceOnEdges('bottom');
   } else if (this.directionY < 0) {
     this.bounceOnEdges('top');
   } 
   if (this.directionX > 0) {
     this.bounceOnEdges('right');
-  } 
-  else if (this.directionX < 0) {
+  } else if (this.directionX < 0) {
     this.bounceOnEdges('left');
   }
     return collision;

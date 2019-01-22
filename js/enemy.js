@@ -1,8 +1,9 @@
 'use strict';
 
-function WhiteWalker(canvas, x, y) {
+function WhiteWalker(canvas, x, y, map) {
   this.canvas = canvas;
   this.context = canvas.getContext('2d');
+  this.map = map;
   this.x = x;
   this.y = y;
   this.directionX = 1;
@@ -76,6 +77,39 @@ WhiteWalker.prototype.checkForEdges = function() {
   }
 }
 
+WhiteWalker.prototype.checkForObstacle = function(map) {
+  
+  var left = this.x;
+  var right = this.x + this.width;
+  var top = this.y;
+  var bottom = this.y + this.height;
+
+  var collision = 
+    map.isSolidTileAtXY(left,top) ||
+    map.isSolidTileAtXY(right, top) ||
+    map.isSolidTileAtXY(right, bottom) ||
+    map.isSolidTileAtXY(left, bottom);
+
+  if (!collision) { return; }
+
+  if (this.directionY > 0) {
+    this.x -= this.directionX * this.speed;
+    this.y -= this.directionY * this.speed;
+  } else if (this.directionY < 0) {
+    this.x -= this.directionX * this.speed;
+    this.y -= this.directionY * this.speed;
+  } 
+  if (this.directionX > 0) {
+    this.x -= this.directionX * this.speed;
+    this.y -= this.directionY * this.speed;
+  } 
+  else if (this.directionX < 0) {
+    this.x -= this.directionX * this.speed;
+    this.y -= this.directionY * this.speed;
+  }
+    return collision;
+}
+
 WhiteWalker.prototype.followHero = function(hero) {
 
   var isHeroOnLeftSide = hero.x + hero.width / 2 < this.x + this.width / 2;
@@ -99,6 +133,7 @@ WhiteWalker.prototype.followHero = function(hero) {
 
 WhiteWalker.prototype.move = function(hero) {
   this.checkForEdges();
+  this.checkForObstacle(this.map);
   // Cancel shaking effect when walks straight
   if(hero.x === this.x) {
     this.y += this.directionY * this.speed; 

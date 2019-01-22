@@ -2,17 +2,17 @@
 
 function Game(canvas, gameOverHandler) {
   this.context = canvas.getContext('2d');
-  this.hero = new Hero(canvas);
-  this.enemies = [];
   this.map = new Map(canvas);
+  this.hero = new Hero(canvas, this.map);
+  this.enemies = [];
   this.animation;
   this.gameOverHandler = gameOverHandler;
 
   this._generateEnemy = function() {
     // Enemy should not appear on the border
-    var randomPositionX = Math.random() * (canvas.width - this.map.map.tsize);
-    var randomPositionY = Math.random() * (canvas.height - this.map.map.tsize);
-    this.enemies.push(new WhiteWalker(canvas, randomPositionX, randomPositionY));
+    var randomPositionX = Math.floor(Math.random() * (canvas.width - this.map.map.tsize));
+    var randomPositionY = Math.floor(Math.random() * (canvas.height - this.map.map.tsize));
+    this.enemies.push(new WhiteWalker(canvas, randomPositionX, randomPositionY, this.map));
   }
 
   this._updateGame = function() {
@@ -23,7 +23,7 @@ function Game(canvas, gameOverHandler) {
         setTimeout(function() {
           enemy.followHero(this.hero);
           enemy.move(this.hero);
-        }.bind(this), 3000);
+        }.bind(this), 1000);
       } else {
         //check for hero position and adjust enemies direction accordingly
         enemy.followHero(this.hero);
@@ -70,7 +70,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   setInterval(function() {
     // this._generateEnemy();
-  }.bind(this), 10000);
+  }.bind(this), 5000);
 
   loop.call(this); 
 }
