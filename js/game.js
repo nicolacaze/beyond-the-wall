@@ -46,6 +46,7 @@ function Game(canvas, gameOverHandler) {
 }
 
 Game.prototype.init = function() {
+  this.map.generateRandomMap();
   function loop() {
     this.animation = window.requestAnimationFrame(loop.bind(this));
 
@@ -69,7 +70,7 @@ Game.prototype.init = function() {
   }    
   // Generate a new Enemy every 10 seconds
   setInterval(function() {
-    this._generateEnemy();
+    // this._generateEnemy();
   }.bind(this), 5000);
 
   loop.call(this); 

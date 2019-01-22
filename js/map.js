@@ -10,18 +10,19 @@ function Map(canvas) {
     rows: 9,
     tsize: 64,
     tiles: [
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
-      1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1,
-      1, 3, 3, 2, 3, 2, 2, 3, 3, 3, 3, 2, 3, 3, 3, 1,
-      1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 1,
-      1, 3, 2, 3, 3, 2, 3, 3, 3, 2, 2, 3, 3, 3, 3, 1,
-      1, 3, 2, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 1,
-      1, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 3, 3, 3, 3, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ],
   };
 }
+
 Map.prototype.getTile = function(col, row) {
   return this.map.tiles[row * this.map.cols + col]
 }
@@ -52,6 +53,39 @@ Map.prototype.isSolidTileAtXY = function (x, y) {
       || tile === 5;
       return res || isSolid;
   }.bind(this), false);
+}
+
+Map.prototype.generateRandomMap = function() {
+  
+  // Create icing border for our map; value 1 is for ice sprite
+  this.map.tiles.forEach(function(tile, i, arr){
+    if (i < 16) {
+      arr[i] = 1;
+    }
+    if (i % 16 === 0) {
+      arr[i] = 1;
+      arr[i - 1] = 1;
+    }
+    if (i >= 128) {
+      arr[i] = 1;
+    } 
+  });
+
+  // Fill the rest of the map randomly with obstacles and free space
+  this.map.tiles.forEach(function(tile, i, arr){
+    if (tile === 0) {
+      var random = Math.random();
+      // With 10% chance put an  tree obstacle
+      if(random > 0.9) {
+        arr[i] = 2;
+      // With 5% chance put a hole obstacle
+      } else if (random > 0.85 && random < 0.9) {
+        arr[i] = 4;
+      } else {
+        arr[i] = 3;
+      }
+    }
+  });
 }
 
 Map.prototype.drawMap = function () {
