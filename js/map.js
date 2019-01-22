@@ -56,7 +56,8 @@ Map.prototype.isSolidTileAtXY = function (x, y) {
 }
 
 Map.prototype.generateRandomMap = function() {
-  
+  // Ensure there is free space at Hero initial position
+  this.map.tiles[17] = 3;
   // Create icing border for our map; value 1 is for ice sprite
   this.map.tiles.forEach(function(tile, i, arr){
     if (i < 16) {

@@ -9,11 +9,22 @@ function Game(canvas, gameOverHandler) {
   this.gameOverHandler = gameOverHandler;
 
   this._generateEnemy = function() {
-    // Enemy should not appear on the border
-    var randomPositionX = Math.floor(Math.random() * (canvas.width - this.map.map.tsize));
-    var randomPositionY = Math.floor(Math.random() * (canvas.height - this.map.map.tsize));
-    this.enemies.push(new WhiteWalker(canvas, randomPositionX, randomPositionY, this.map));
-  }
+    // Have a random position on map and get tile index
+    var randomCol = Math.floor((Math.random() * (this.map.map.cols - 1) ) + 1);
+    var randomRow = Math.floor((Math.random() * (this.map.map.rows - 1) ) + 1);
+    var randomTileIndex = randomRow * this.map.map.cols + randomCol;
+
+    // Loop on the map from random tile index. When free space is found, place enemy.
+    console.log(this.map.map.tiles[randomTileIndex]);
+    while (this.map.map.tiles[randomTileIndex] !== 3) {
+      randomTileIndex++;
+    }
+    var row = Math.ceil( randomTileIndex / this.map.map.cols );
+    var col = randomTileIndex - this.map.map.cols * (row - 1) + 1;
+    var x = col * this.map.map.tsize;
+    var y = row * this.map.map.tsize;
+    this.enemies.push(new WhiteWalker(canvas, x, y, this.map));
+  } 
 
   this._updateGame = function() {
     this.enemies.forEach(function(enemy, index, array) {
@@ -71,7 +82,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 10000);
+  }.bind(this), 5000);
 
   loop.call(this); 
 }
