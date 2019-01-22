@@ -11,7 +11,7 @@ var canvas         = document.getElementById('canvas');
 var context        = canvas.getContext('2d');
 var timeDisplay    = document.querySelector('#time');
 var heroHealth     = document.querySelector('#health');
-var gameDuration   = 30;
+var gameDuration   = 60;
 var timerInterval;
 
 
@@ -21,7 +21,7 @@ function startGame() {
   function gameOver() {
     game.stop();
     clearInterval(timerInterval);
-    timeDisplay.textContent = '00:30';
+    timeDisplay.textContent = '01:00';
     transitionBetweenScreens(gameScreen, gameOverScreen);
     gameOverMsg.textContent = 'You died beyond the wall...';
   }
@@ -29,7 +29,7 @@ function startGame() {
   function gameSuccess() {
     game.stop();
     clearInterval(timerInterval);
-    timeDisplay.textContent = '00:30';
+    timeDisplay.textContent = '01:00';
     transitionBetweenScreens(gameScreen, gameOverScreen);
     gameOverMsg.textContent = 'Congratulations! You survived.';
   }
@@ -58,7 +58,7 @@ function startGame() {
   }
 
   var game = new Game(canvas, gameOver, decreaseHeroHealth);
-  // startTimer(gameDuration, timeDisplay, gameSuccess);
+  startTimer(gameDuration, timeDisplay, gameSuccess);
   game.init();
 
   document.addEventListener('keydown', onKeyDown);
@@ -78,7 +78,7 @@ var startTimer = function(duration, display, gameSuccessHandler) {
       if (timer < 0) {
           timer = duration;
       }
-      if(seconds === '00') {
+      if(minutes === '00' && seconds === '00') {
         gameSuccessHandler();
       }
   }, 1000);
