@@ -9,13 +9,9 @@ function Game(canvas, gameOverHandler) {
   this.gameOverHandler = gameOverHandler;
 
   this._generateEnemy = function() {
-    // Have a random position on map and get tile index
-    var randomCol = Math.floor((Math.random() * (this.map.map.cols - 1) ) + 1);
-    var randomRow = Math.floor((Math.random() * (this.map.map.rows - 1) ) + 1);
-    var randomTileIndex = randomRow * this.map.map.cols + randomCol;
-
+    // Get a random Index on our 1 dimension map array and store his index
+    var randomTileIndex =  this.map.map.cols + Math.floor(Math.random() * (this.map.map.tiles.length - this.map.map.cols));
     // Loop on the map from random tile index. When free space is found, place enemy.
-    console.log(this.map.map.tiles[randomTileIndex]);
     while (this.map.map.tiles[randomTileIndex] !== 3) {
       randomTileIndex++;
     }
@@ -68,6 +64,11 @@ Game.prototype.init = function() {
     this.enemies.forEach(function(enemy) {
 
       if(this.hero.hasCollidedWithEnemy(enemy)) {
+        this.hero.loseHealth(enemy);
+        console.log(this.hero.health);
+        enemy.die();
+      }
+      if(this.hero.isDead()) {
         this.gameOverHandler();
       }
     }.bind(this));
@@ -82,7 +83,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 5000);
+  }.bind(this), 10000);
 
   loop.call(this); 
 }

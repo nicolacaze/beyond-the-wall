@@ -79,7 +79,7 @@ Map.prototype.generateRandomMap = function() {
     if (tile === 0) {
       var random = Math.random();
       // With 10% chance put an  tree obstacle
-      if(random > 0.9) {
+      if(random > 0.95) {
         arr[i] = 2;
       // With 5% chance put a hole obstacle
       } else if (random > 0.85 && random < 0.9) {

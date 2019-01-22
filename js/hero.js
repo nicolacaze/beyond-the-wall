@@ -8,10 +8,19 @@ function Hero(canvas, map) {
   this.directionX;
   this.directionY;
   this.speed = 10;
+  this.health = 100;
   this.image = new Image(50, 64);
   this.map = map;
   this.width = this.image.width;
   this.height = this.image.height;
+}
+
+Hero.prototype.loseHealth = function(enemy) {
+  this.health -= enemy.strength;
+}
+
+Hero.prototype.isDead = function() {
+  return this.health <= 0;
 }
 
 Hero.prototype.setDirection = function(direction) {

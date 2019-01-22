@@ -9,9 +9,16 @@ function WhiteWalker(canvas, x, y, map) {
   this.directionX = 1;
   this.directionY = 1;
   this.speed = 0.5;
+  this.strength = 25;
   this.image = new Image(45, 64);
   this.width = this.image.width;
   this.height = this.image.height;
+}
+
+WhiteWalker.prototype.die = function() {
+  this.x = -2000;
+  this.directionX = 0;
+  this.directionY = 0;
 }
 
 WhiteWalker.prototype.setDirection = function(direction) {
