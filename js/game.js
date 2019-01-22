@@ -1,22 +1,22 @@
 'use strict';
 
-function Game(canvas, gameOverHandler) {
+function Game(canvas, gameOverHandler, heroHealthHandler) {
   this.context = canvas.getContext('2d');
   this.map = new Map(canvas);
   this.hero = new Hero(canvas, this.map);
   this.enemies = [];
   this.animation;
   this.gameOverHandler = gameOverHandler;
+  this.heroHealthHandler = heroHealthHandler;
 
   this._generateEnemy = function() {
     // Get a random Index on our 1 dimension map array and store his index
     var randomTileIndex =  this.map.map.cols + Math.floor(Math.random() * (this.map.map.tiles.length - this.map.map.cols));
     // Loop on the map from random tile index. When free space is found, place enemy.
-    while (this.map.map.tiles[randomTileIndex] !== 3) {
-      randomTileIndex++;
-    }
-    var row = Math.ceil( randomTileIndex / this.map.map.cols );
-    var col = randomTileIndex - this.map.map.cols * (row - 1) + 1;
+    var freeSpace = this.map.map.tiles.indexOf(3, randomTileIndex);
+      
+    var row = Math.ceil( freeSpace / this.map.map.cols );
+    var col = freeSpace - this.map.map.cols * (row - 1) + 1;
     var x = col * this.map.map.tsize;
     var y = row * this.map.map.tsize;
     this.enemies.push(new WhiteWalker(canvas, x, y, this.map));
@@ -65,7 +65,7 @@ Game.prototype.init = function() {
 
       if(this.hero.hasCollidedWithEnemy(enemy)) {
         this.hero.loseHealth(enemy);
-        console.log(this.hero.health);
+        this.heroHealthHandler();
         enemy.die();
       }
       if(this.hero.isDead()) {
@@ -83,7 +83,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 10000);
+  }.bind(this), 4000);
 
   loop.call(this); 
 }

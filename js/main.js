@@ -10,6 +10,7 @@ var gameOverMsg    = document.querySelector('.game-over-screen p');
 var canvas         = document.getElementById('canvas');
 var context        = canvas.getContext('2d');
 var timeDisplay    = document.querySelector('#time');
+var heroHealth     = document.querySelector('#health');
 var gameDuration   = 30;
 var timerInterval;
 
@@ -52,7 +53,11 @@ function startGame() {
     }
   }
 
-  var game = new Game(canvas, gameOver);
+  function decreaseHeroHealth() {
+    heroHealth.value -= 25;
+  }
+
+  var game = new Game(canvas, gameOver, decreaseHeroHealth);
   // startTimer(gameDuration, timeDisplay, gameSuccess);
   game.init();
 
