@@ -23,6 +23,14 @@ Hero.prototype.isDead = function() {
   return this.health <= 0;
 }
 
+Hero.prototype.shout = function() {
+
+  var shoutSound = new Audio('./assets/sounds/grunt-sound.wav');
+  shoutSound.preload = 'auto';
+  shoutSound.currentTime = 0;
+  shoutSound.play();
+}
+
 Hero.prototype.setDirection = function(direction) {
   switch(direction) {
     case 'right':

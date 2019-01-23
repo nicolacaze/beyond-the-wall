@@ -77,6 +77,7 @@ Game.prototype.init = function() {
       if(this.hero.hasCollidedWithEnemy(enemy)) {
         // this.heroPainSound.play();
         this.hero.loseHealth(enemy);
+        this.hero.shout();
         this.heroHealthHandler();
         enemy.die();
       }
@@ -95,7 +96,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   this.enemyGeneratorInterval = setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 5000);
+  }.bind(this), 1000);
 
   loop.call(this); 
 }
