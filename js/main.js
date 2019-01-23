@@ -14,7 +14,6 @@ function main() {
   var gameDuration   = 60;
   var timerInterval;
   
-  
   function startGame() {
     
     // Callback function for win and fail scenari
@@ -97,9 +96,8 @@ function main() {
     heroHealth.value = 100;
     clearInterval(this.timerInterval);
     startGame();
-    
   });
 }
 
-window.addEventListener('load', main)
+window.addEventListener('load', main);
 
