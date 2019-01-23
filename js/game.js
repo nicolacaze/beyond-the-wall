@@ -93,8 +93,6 @@ Game.prototype.init = function() {
     }.bind(this));
     if(this.hero.isDead()) {
       this.gameOverHandler(this.hero.isDead());
-      this.windSound.pause();
-      this.windSound.currentTime = 0;
     }
 
     // clear Canvas
@@ -107,7 +105,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   this.enemyGeneratorInterval = setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 5000);
+  }.bind(this), 10000);
 
   loop.call(this); 
 }
@@ -115,10 +113,11 @@ Game.prototype.init = function() {
 Game.prototype.stop = function() {
   window.cancelAnimationFrame(this.animation);
   clearInterval(this.enemyGeneratorInterval);
+  this.windSound.pause();
+  this.windSound.currentTime = 0;
 }
 
-Game.prototype.onKeyPress = function(direction, axis) {
-  
+Game.prototype.onKeyPress = function(direction, axis) {d
   this.hero.setDirection(direction);
   this.hero.move(axis);
 }

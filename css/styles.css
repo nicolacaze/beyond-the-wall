@@ -32,6 +32,7 @@ h1 {
   font-size: 3rem;
   font-family: 'Game of Thrones';
   margin-bottom: 3rem;
+  margin-top: 4rem;
 }
 
 h2 {}
@@ -130,6 +131,7 @@ p {
   font-family: 'Game of thrones';
   padding: 1rem 1rem;
   margin-bottom: 2rem;
+  cursor: pointer;
 }
 
 #canvas {
@@ -149,6 +151,8 @@ p {
   padding: 1rem 1rem;
   margin-bottom: 2rem;
   font-family: 'Game of thrones';
+  cursor: pointer;
+
 }
 
 .player-status-card + div {
