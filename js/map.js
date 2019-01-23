@@ -50,16 +50,29 @@ Map.prototype.isSolidTileAtXY = function (x, y) {
   var col = Math.floor(x / this.map.tsize);
   var row = Math.floor(y / this.map.tsize);
 
-  // tiles 1, 2, 4 and 5 are solid -- the rest are walkable
+  // tiles 1, 2 and 5 are solid -- the rest are walkable
   // loop through all layers and return TRUE if any tile is solid
   return this.map.tiles.reduce(function (res, layer) {
       var tile = this.getTile(col, row);
       var isSolid = tile === this.ICE_TILE
       || tile === this.TREE_TILE
-      || tile === this.HOLE_TILE
       || tile === this.WATER_TILE;
       return res || isSolid;
   }.bind(this), false);
+}
+
+Map.prototype.isTrapTileAtXY = function(x, y) {
+   // Convert x, y position to a tile position on map
+   var col = Math.floor(x / this.map.tsize);
+   var row = Math.floor(y / this.map.tsize);
+ 
+   // tiles 1, 2, 4 and 5 are solid -- the rest are walkable
+   // loop through all layers and return TRUE if any tile is solid
+   return this.map.tiles.reduce(function (res, layer) {
+       var tile = this.getTile(col, row);
+       var isTrap = tile === this.HOLE_TILE;
+       return res || isTrap;
+   }.bind(this), false);
 }
 
 Map.prototype.generateRandomMap = function() {
