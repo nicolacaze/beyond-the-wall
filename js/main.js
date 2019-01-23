@@ -11,7 +11,7 @@ function main() {
   var canvas         = document.getElementById('canvas');
   var timeDisplay    = document.querySelector('#time');
   var heroHealth     = document.querySelector('#health');
-  var gameDuration   = 20;
+  var gameDuration   = 60;
   var timerInterval;
   
   
@@ -21,7 +21,7 @@ function main() {
     function callGameOver(gameOver) {
       game.stop();
       clearInterval(timerInterval);
-      timeDisplay.textContent = '00:20';
+      timeDisplay.textContent = '01:00';
       transitionBetweenScreens(gameScreen, gameOverScreen);
       if(gameOver) {
         gameOverMsg.textContent = 'You died beyond the wall...';

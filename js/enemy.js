@@ -21,6 +21,13 @@ WhiteWalker.prototype.die = function() {
   this.directionY = 0;
 }
 
+WhiteWalker.prototype.scream = function() {
+  var screamSound = new Audio('./assets/sounds/white-walker-scream.wav');
+  screamSound.preload = 'auto';
+  screamSound.currentTime = 0;
+  screamSound.play();
+}
+
 WhiteWalker.prototype.setDirection = function(direction) {
   switch(direction) {
     case 'right':
@@ -97,7 +104,6 @@ WhiteWalker.prototype.checkForTrap = function(map) {
     map.isTrapTileAtXY(right, top) ||
     map.isTrapTileAtXY(right, bottom) ||
     map.isTrapTileAtXY(left, bottom);
-  console.log(collision);
   if (!collision) { return; }
 
   this.die();

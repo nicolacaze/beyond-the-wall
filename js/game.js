@@ -11,6 +11,7 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
   this.gameOverHandler = gameOverHandler;
   this.heroHealthHandler = heroHealthHandler;
   this.enemyGeneratorInterval;
+  this.windSound
 
   this._getRandomFreePosition = function() {
     // Get a random index on our 1 dimension map array
@@ -62,9 +63,17 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
     });
   }
 }
+Game.prototype.setBackgroundSound = function() {
+  this.windSound = new Audio('./assets/sounds/wind.wav');
+  this.windSound.preload = 'auto';
+  this.windSound.currentTime = 0;
+  this.windSound.loop = true;
+}
 
 Game.prototype.init = function() {
   this.map.generateRandomMap();
+  this.setBackgroundSound();
+  this.windSound.play();
   function loop() {
     this.animation = window.requestAnimationFrame(loop.bind(this));
 
@@ -75,15 +84,17 @@ Game.prototype.init = function() {
     this.enemies.forEach(function(enemy) {
 
       if(this.hero.hasCollidedWithEnemy(enemy)) {
-        // this.heroPainSound.play();
         this.hero.loseHealth(enemy);
         this.hero.shout();
         this.heroHealthHandler();
         enemy.die();
+        enemy.scream();
       }
     }.bind(this));
     if(this.hero.isDead()) {
       this.gameOverHandler(this.hero.isDead());
+      this.windSound.pause();
+      this.windSound.currentTime = 0;
     }
 
     // clear Canvas
@@ -96,7 +107,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   this.enemyGeneratorInterval = setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 1000);
+  }.bind(this), 5000);
 
   loop.call(this); 
 }
@@ -107,6 +118,7 @@ Game.prototype.stop = function() {
 }
 
 Game.prototype.onKeyPress = function(direction, axis) {
+  
   this.hero.setDirection(direction);
   this.hero.move(axis);
 }
