@@ -63,7 +63,7 @@ Map.prototype.isSolidTileAtXY = function (x, y) {
 }
 
 Map.prototype.generateRandomMap = function() {
-  // Create icing border for our map; value 1 is for ice sprite
+  // Create icing border for our map
   this.map.tiles.forEach(function(tile, i, arr){
     if (i < 16) {
       arr[i] = this.ICE_TILE;
@@ -81,7 +81,7 @@ Map.prototype.generateRandomMap = function() {
   this.map.tiles.forEach(function(tile, i, arr){
     if (tile === this.EMPTY_TILE) {
       var random = Math.random();
-      // With 10% chance put an  tree obstacle
+      // With 10% chance put a tree obstacle
       if(random > 0.90) {
         arr[i] = this.TREE_TILE;
         // With 2% chance put a hole trap

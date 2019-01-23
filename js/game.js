@@ -113,6 +113,7 @@ Game.prototype.init = function() {
   this.enemyGeneratorInterval = setInterval(function() {
     this._generateEnemy();
   }.bind(this), 5000);
+  
   loop.call(this); 
 }
 
