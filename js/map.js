@@ -93,8 +93,8 @@ Map.prototype.generateRandomMap = function() {
   this.map.tiles.forEach(function(tile, i, arr){
     if (tile === this.EMPTY_TILE) {
       var random = Math.random();
-      // With 10% chance put a tree obstacle
-      if(random > 0.90) {
+      // With 8% chance put a tree obstacle
+      if(random > 0.92) {
         arr[i] = this.TREE_TILE;
         // With 2% chance put a hole trap
       } else if (random > 0.88 && random < 0.9) {

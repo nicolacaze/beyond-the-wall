@@ -23,12 +23,18 @@ Hero.prototype.isDead = function() {
   return this.health <= 0;
 }
 
-Hero.prototype.shout = function() {
-
+Hero.prototype.shoutOnDamage = function() {
   var shoutSound = new Audio('./assets/sounds/grunt-sound.wav');
   shoutSound.preload = 'auto';
   shoutSound.currentTime = 0;
   shoutSound.play();
+}
+
+Hero.prototype.screamOnDeath = function() {
+  var screamSound = new Audio('./assets/sounds/aargh0.ogg');
+  screamSound.preload = 'auto';
+  screamSound.currentTime = 0;
+  screamSound.play();
 }
 
 Hero.prototype.setDirection = function(direction) {
@@ -83,9 +89,7 @@ Hero.prototype.checkForTrap = function(map) {
     map.isTrapTileAtXY(right, top) ||
     map.isTrapTileAtXY(right, bottom) ||
     map.isTrapTileAtXY(left, bottom);
-  console.log(collision);
   if (!collision) { return; }
-
   this.health = 0;
   return collision;
 }

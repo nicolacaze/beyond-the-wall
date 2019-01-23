@@ -85,13 +85,14 @@ Game.prototype.init = function() {
 
       if(this.hero.hasCollidedWithEnemy(enemy)) {
         this.hero.loseHealth(enemy);
-        this.hero.shout();
+        this.hero.shoutOnDamage();
         this.heroHealthHandler();
         enemy.die();
         enemy.scream();
       }
     }.bind(this));
     if(this.hero.isDead()) {
+      this.hero.screamOnDeath();
       this.gameOverHandler(this.hero.isDead());
     }
 
@@ -117,7 +118,7 @@ Game.prototype.stop = function() {
   this.windSound.currentTime = 0;
 }
 
-Game.prototype.onKeyPress = function(direction, axis) {d
+Game.prototype.onKeyPress = function(direction, axis) {
   this.hero.setDirection(direction);
   this.hero.move(axis);
 }
