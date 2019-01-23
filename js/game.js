@@ -6,42 +6,24 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
   this.hero = new Hero(canvas, this.map);
   this.enemies = [];
   this.animation;
-  // this.audioContext = new AudioContext();
-  // this.heroPainSound = new Sound('../assets/sounds/gruntsound.wav');
   this.gameOverHandler = gameOverHandler;
   this.heroHealthHandler = heroHealthHandler;
   this.enemyGeneratorInterval;
 
-  this._generateEnemy = function() {
+  this._getRandomFreePosition = function() {
     // Get a random index on our 1 dimension map array
     var randomTileIndex = this.map.map.cols 
-                          + Math.floor(Math.random() 
-                          * (this.map.map.tiles.length - (this.map.map.cols * 2)));
-    
-    // Loop on the map from random tile index. When free space is found, place enemy.
-    console.log(randomTileIndex);
-    var freeSpace;
-    if (randomTileIndex < this.map.map.tiles.length / 2) {
-      freeSpace = this.map.map.tiles.indexOf(this.map.FREE_TILE, 0);
+    + Math.floor(Math.random() 
+    * (this.map.map.tiles.length - (this.map.map.cols * 2)));
+    if (this.map.map.tiles[randomTileIndex] === this.map.FREE_TILE && randomTileIndex < 128) {
+      return randomTileIndex;
     } else {
-      freeSpace = this.map.map.tiles.indexOf(this.map.FREE_TILE, randomTileIndex);
+      this._generateEnemy();
     }
-
-    // var freeSpace;
-    // for (var i = randomTileIndex; i < this.map.map.tiles.length; i++) {
-      
-    //   if (this.map.map.tiles[i] === this.map.FREE_TILE) {
-    //     freeSpace = i;
-    //   } else if (this.map.map.tiles[i + 1] === this.map.FREE_TILE) {
-    //     freeSpace = i + 1;
-    //   } else if (this.map.map.tiles[i - 1] === this.map.FREE_TILE) {
-    //     freeSpace = i - 1;
-    //   } else if (this.map.map.tiles[i - this.map.map.cols] === this.map.FREE_TILE) {
-    //     freeSpace = i - this.map.map.cols;
-    //   } else if (this.map.map.tiles[i + this.map.map.cols] === this.map.FREE_TILE) {
-    //     freeSpace = i + this.map.map.cols;
-    //   }
-    // }
+  }
+    
+  this._generateEnemy = function() {
+    var freeSpace = this._getRandomFreePosition();
       
     var row = Math.ceil( freeSpace / this.map.map.cols );
     var col = freeSpace - this.map.map.cols * (row - 1) + 1;
@@ -113,7 +95,7 @@ Game.prototype.init = function() {
   this.enemyGeneratorInterval = setInterval(function() {
     this._generateEnemy();
   }.bind(this), 5000);
-  
+
   loop.call(this); 
 }
 
