@@ -4,6 +4,8 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
   this.context = canvas.getContext('2d');
   this.map = new Map(canvas);
   this.hero = new Hero(canvas, this.map);
+  this.enemyWidth = 45;
+  this.enemyHeight = 64;
   this.enemies = [];
   this.animation;
   this.gameOverHandler = gameOverHandler;
@@ -27,8 +29,8 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
       
     var row = Math.ceil( freeSpace / this.map.map.cols );
     var col = freeSpace - this.map.map.cols * (row - 1) + 1;
-    var x = col * this.map.map.tsize;
-    var y = row * this.map.map.tsize;
+    var x = col * this.map.map.tsize - this.enemyWidth;
+    var y = row * this.map.map.tsize - this.enemyHeight;
     this.enemies.push(new WhiteWalker(canvas, x, y, this.map));
   } 
 
