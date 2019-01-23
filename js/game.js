@@ -31,7 +31,9 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
     var col = freeSpace - this.map.map.cols * (row - 1) + 1;
     var x = col * this.map.map.tsize - this.enemyWidth;
     var y = row * this.map.map.tsize - this.enemyHeight;
-    this.enemies.push(new WhiteWalker(canvas, x, y, this.map));
+    var whiteWalker = new WhiteWalker(canvas, x, y, this.map);
+    whiteWalker.scream();
+    this.enemies.push(whiteWalker);
   } 
 
   this._updateGame = function() {
@@ -88,7 +90,7 @@ Game.prototype.init = function() {
         this.hero.shoutOnDamage();
         this.heroHealthHandler();
         enemy.die();
-        enemy.scream();
+        // enemy.scream();
       }
     }.bind(this));
     if(this.hero.isDead()) {
