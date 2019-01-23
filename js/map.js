@@ -27,6 +27,7 @@ function Map(canvas) {
   this.FREE_TILE = 3;
   this.HOLE_TILE = 4;
   this.WATER_TILE = 5;
+  this.START_POINT = 17;
 }
 
 Map.prototype.getTile = function(col, row) {
@@ -64,8 +65,6 @@ Map.prototype.isSolidTileAtXY = function (x, y) {
 Map.prototype.generateRandomMap = function() {
   // Create icing border for our map; value 1 is for ice sprite
   this.map.tiles.forEach(function(tile, i, arr){
-    // Ensure first tile of our map is free for our Hero
-    arr[17] === this.FREE_TILE;
     if (i < 16) {
       arr[i] = this.ICE_TILE;
     }
@@ -80,14 +79,12 @@ Map.prototype.generateRandomMap = function() {
 
   // Fill the rest of the map randomly with obstacles and free space
   this.map.tiles.forEach(function(tile, i, arr){
-    // Ensure first tile of our map is free for our Hero
-    arr[17] === this.FREE_TILE;
-    if (tile === 0) {
+    if (tile === this.EMPTY_TILE) {
       var random = Math.random();
       // With 10% chance put an  tree obstacle
       if(random > 0.90) {
         arr[i] = this.TREE_TILE;
-      // With 2% chance put a hole trap
+        // With 2% chance put a hole trap
       } else if (random > 0.88 && random < 0.9) {
         arr[i] = this.HOLE_TILE;
       } else {
@@ -95,6 +92,8 @@ Map.prototype.generateRandomMap = function() {
       }
     }
   }.bind(this));
+  // Ensure first tile of our map is free for our Hero
+  this.map.tiles[this.START_POINT] = this.FREE_TILE;
 }
 
 Map.prototype.drawMap = function () {
