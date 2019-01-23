@@ -65,7 +65,7 @@ WhiteWalker.prototype.hasReachedTop = function() {
 }
 
 WhiteWalker.prototype.hasReachedBottom = function() {
-  if (this.y + this.height / 2>= this.canvas.height - this.height) {
+  if (this.y + this.height / 2 >= this.canvas.height - this.height) {
     return true;
   } else {
     return false;
@@ -82,6 +82,26 @@ WhiteWalker.prototype.checkForEdges = function() {
   } else if(this.hasReachedBottom()) {
     this.setDirection('up');
   }
+}
+
+WhiteWalker.prototype.checkForTrap = function(map) {
+
+  // Make collision happen on border of draw and not his box element
+  var left = this.x  + this.width / 2;
+  var right = this.x + this.width / 2;
+  var top = this.y + this.height / 2;
+  var bottom = this.y + this.height / 2;
+
+  var collision = 
+    map.isTrapTileAtXY(left,top) ||
+    map.isTrapTileAtXY(right, top) ||
+    map.isTrapTileAtXY(right, bottom) ||
+    map.isTrapTileAtXY(left, bottom);
+  console.log(collision);
+  if (!collision) { return; }
+
+  this.die();
+  return collision;
 }
 
 WhiteWalker.prototype.checkForObstacle = function(map) {
@@ -151,8 +171,9 @@ WhiteWalker.prototype.followHero = function(hero) {
 }
 
 WhiteWalker.prototype.move = function(hero) {
-  this.checkForEdges();
+  this.checkForTrap(this.map);
   this.checkForObstacle(this.map);
+  this.checkForEdges();
   // Cancel shaking effect when walks straight
   if(hero.x === this.x) {
     this.y += this.directionY * this.speed; 

@@ -65,10 +65,10 @@ Hero.prototype.move = function(axis) {
 Hero.prototype.checkForTrap = function(map) {
 
   // Make collision happen on border of draw and not his box element
-  var left = this.x  + this.width / 4;
-  var right = this.x + this.width * 3 / 4;
-  var top = this.y + this.height / 4;
-  var bottom = this.y + this.height * 3 / 4;
+  var left = this.x  + this.width / 2;
+  var right = this.x + this.width / 2;
+  var top = this.y + this.height / 2;
+  var bottom = this.y + this.height / 2;
 
   var collision = 
     map.isTrapTileAtXY(left,top) ||
