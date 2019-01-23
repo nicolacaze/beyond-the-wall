@@ -52,13 +52,34 @@ Hero.prototype.hasCollidedWithEnemy = function(enemy) {
 }
 
 Hero.prototype.move = function(axis) {
-  this.checkForEdges();
+  this.checkForTrap(this.map);
   this.checkForObstacle(this.map);
+  this.checkForEdges();
   if(axis === 'x') {
     this.x += this.directionX * this.speed;
   } else if(axis === 'y') {
     this.y += this.directionY * this.speed;
   } 
+}
+
+Hero.prototype.checkForTrap = function(map) {
+
+  // Make collision happen on border of draw and not his box element
+  var left = this.x  + this.width / 4;
+  var right = this.x + this.width * 3 / 4;
+  var top = this.y + this.height / 4;
+  var bottom = this.y + this.height * 3 / 4;
+
+  var collision = 
+    map.isTrapTileAtXY(left,top) ||
+    map.isTrapTileAtXY(right, top) ||
+    map.isTrapTileAtXY(right, bottom) ||
+    map.isTrapTileAtXY(left, bottom);
+  console.log(collision);
+  if (!collision) { return; }
+
+  this.health = 0;
+  return collision;
 }
 
 Hero.prototype.checkForObstacle = function(map) {
@@ -87,7 +108,7 @@ Hero.prototype.checkForObstacle = function(map) {
   } else if (this.directionX < 0) {
     this.bounceOnEdges('left');
   }
-    return collision;
+  return collision;
 }
 
 Hero.prototype.checkForEdges = function() {

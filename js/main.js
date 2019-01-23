@@ -5,12 +5,10 @@ function main() {
   var playBtn        = document.querySelector('.screen button');
   var splashScreen   = document.querySelector('.screen');
   var gameScreen     = document.querySelector('.game-screen');
-  var statusCard     = document.querySelector('.player-status-card');
   var playAgainBtn   = document.querySelector('.game-over-screen button');
   var gameOverScreen = document.querySelector('.game-over-screen');
   var gameOverMsg    = document.querySelector('.game-over-screen p');
   var canvas         = document.getElementById('canvas');
-  var context        = canvas.getContext('2d');
   var timeDisplay    = document.querySelector('#time');
   var heroHealth     = document.querySelector('#health');
   var gameDuration   = 20;
@@ -104,6 +102,4 @@ function main() {
 }
 
 window.addEventListener('load', main)
-
-
 

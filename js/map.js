@@ -66,8 +66,7 @@ Map.prototype.isTrapTileAtXY = function(x, y) {
    var col = Math.floor(x / this.map.tsize);
    var row = Math.floor(y / this.map.tsize);
  
-   // tiles 1, 2, 4 and 5 are solid -- the rest are walkable
-   // loop through all layers and return TRUE if any tile is solid
+   // loop through all layers and return TRUE if any tile is a trap
    return this.map.tiles.reduce(function (res, layer) {
        var tile = this.getTile(col, row);
        var isTrap = tile === this.HOLE_TILE;

@@ -26,7 +26,6 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
     
   this._generateEnemy = function() {
     var freeSpace = this._getRandomFreePosition();
-      
     var row = Math.ceil( freeSpace / this.map.map.cols );
     var col = freeSpace - this.map.map.cols * (row - 1) + 1;
     var x = col * this.map.map.tsize - this.enemyWidth;
@@ -81,10 +80,10 @@ Game.prototype.init = function() {
         this.heroHealthHandler();
         enemy.die();
       }
-      if(this.hero.isDead()) {
-        this.gameOverHandler(this.hero.isDead());
-      }
     }.bind(this));
+    if(this.hero.isDead()) {
+      this.gameOverHandler(this.hero.isDead());
+    }
 
     // clear Canvas
     this._clearCanvas();
@@ -96,7 +95,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   this.enemyGeneratorInterval = setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 5000);
+  }.bind(this), 10000);
 
   loop.call(this); 
 }
@@ -108,7 +107,6 @@ Game.prototype.stop = function() {
 
 Game.prototype.onKeyPress = function(direction, axis) {
   this.hero.setDirection(direction);
-  console.log(this.hero.checkForObstacle(this.map));
   this.hero.move(axis);
 }
 
