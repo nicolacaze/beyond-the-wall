@@ -21,6 +21,12 @@ function Map(canvas) {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ],
   };
+  this.EMPTY_TILE = 0;
+  this.ICE_TILE = 1;
+  this.TREE_TILE = 2;
+  this.FREE_TILE = 3;
+  this.HOLE_TILE = 4;
+  this.WATER_TILE = 5;
 }
 
 Map.prototype.getTile = function(col, row) {
@@ -47,55 +53,55 @@ Map.prototype.isSolidTileAtXY = function (x, y) {
   // loop through all layers and return TRUE if any tile is solid
   return this.map.tiles.reduce(function (res, layer) {
       var tile = this.getTile(col, row);
-      var isSolid = tile === 1 
-      || tile === 2
-      || tile === 4
-      || tile === 5;
+      var isSolid = tile === this.ICE_TILE
+      || tile === this.TREE_TILE
+      || tile === this.HOLE_TILE
+      || tile === this.WATER_TILE;
       return res || isSolid;
   }.bind(this), false);
 }
 
 Map.prototype.generateRandomMap = function() {
-  // Ensure there is free space at Hero initial position
-  this.map.tiles[17] = 3;
   // Create icing border for our map; value 1 is for ice sprite
   this.map.tiles.forEach(function(tile, i, arr){
+    // Ensure first tile of our map is free for our Hero
+    arr[17] === this.FREE_TILE;
     if (i < 16) {
-      arr[i] = 1;
+      arr[i] = this.ICE_TILE;
     }
     if (i % 16 === 0) {
-      arr[i] = 1;
-      arr[i - 1] = 1;
+      arr[i] = this.ICE_TILE;
+      arr[i - 1] = this.ICE_TILE;
     }
     if (i >= 128) {
-      arr[i] = 1;
+      arr[i] = this.ICE_TILE;
     } 
-  });
+  }.bind(this));
 
   // Fill the rest of the map randomly with obstacles and free space
   this.map.tiles.forEach(function(tile, i, arr){
     // Ensure first tile of our map is free for our Hero
-    arr[17] === 3;
+    arr[17] === this.FREE_TILE;
     if (tile === 0) {
       var random = Math.random();
       // With 10% chance put an  tree obstacle
-      if(random > 0.95) {
-        arr[i] = 2;
-      // With 5% chance put a hole obstacle
-      } else if (random > 0.85 && random < 0.9) {
-        arr[i] = 4;
+      if(random > 0.90) {
+        arr[i] = this.TREE_TILE;
+      // With 2% chance put a hole trap
+      } else if (random > 0.88 && random < 0.9) {
+        arr[i] = this.HOLE_TILE;
       } else {
-        arr[i] = 3;
+        arr[i] = this.FREE_TILE;
       }
     }
-  });
+  }.bind(this));
 }
 
 Map.prototype.drawMap = function () {
   for (var c = 0; c < this.map.cols; c++) {
     for (var r = 0; r < this.map.rows; r++) {
       var tile = this.getTile(c, r);
-      if (tile !== 0) { // 0 => empty tile
+      if (tile !== this.EMPTY_TILE) { // 0 => empty tile
         this.context.drawImage(
           this.atlasImage, // image
           (tile - 1) * this.map.tsize, // source x
