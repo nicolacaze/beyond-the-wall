@@ -17,21 +17,17 @@ var timerInterval;
 
 function startGame() {
   
-  // Callbacks functions for win and fail scenari
-  function gameOver() {
+  // Callback function for win and fail scenari
+  function callGameOver(gameOver) {
     game.stop();
     clearInterval(timerInterval);
     timeDisplay.textContent = '01:00';
     transitionBetweenScreens(gameScreen, gameOverScreen);
-    gameOverMsg.textContent = 'You died beyond the wall...';
-  }
-
-  function gameSuccess() {
-    game.stop();
-    clearInterval(timerInterval);
-    timeDisplay.textContent = '01:00';
-    transitionBetweenScreens(gameScreen, gameOverScreen);
-    gameOverMsg.textContent = 'Congratulations! You survived.';
+    if(gameOver) {
+      gameOverMsg.textContent = 'You died beyond the wall...';
+    } else {
+      gameOverMsg.textContent = 'Congratulations! You survived.';
+    }
   }
   
   function onKeyDown(event) {
@@ -57,8 +53,8 @@ function startGame() {
     heroHealth.value -= 25;
   }
 
-  var game = new Game(canvas, gameOver, decreaseHeroHealth);
-  startTimer(gameDuration, timeDisplay, gameSuccess);
+  var game = new Game(canvas, callGameOver, decreaseHeroHealth);
+  startTimer(gameDuration, timeDisplay, callGameOver);
   game.init();
 
   document.addEventListener('keydown', onKeyDown);
@@ -79,7 +75,7 @@ var startTimer = function(duration, display, gameSuccessHandler) {
           timer = duration;
       }
       if(minutes === '00' && seconds === '00') {
-        gameSuccessHandler();
+        gameSuccessHandler(false);
       }
   }, 1000);
 }
@@ -98,6 +94,8 @@ playBtn.addEventListener('click', function() {
 
 playAgainBtn.addEventListener('click', function() {
   transitionBetweenScreens(gameOverScreen, gameScreen);
+  heroHealth.value = 100;
+  clearInterval(this.timerInterval);
   startGame();
   
 });

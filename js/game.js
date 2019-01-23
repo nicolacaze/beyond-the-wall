@@ -6,6 +6,8 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
   this.hero = new Hero(canvas, this.map);
   this.enemies = [];
   this.animation;
+  // this.audioContext = new AudioContext();
+  // this.heroPainSound = new Sound('../assets/sounds/gruntsound.wav');
   this.gameOverHandler = gameOverHandler;
   this.heroHealthHandler = heroHealthHandler;
 
@@ -73,12 +75,13 @@ Game.prototype.init = function() {
     this.enemies.forEach(function(enemy) {
 
       if(this.hero.hasCollidedWithEnemy(enemy)) {
+        // this.heroPainSound.play();
         this.hero.loseHealth(enemy);
         this.heroHealthHandler();
         enemy.die();
       }
       if(this.hero.isDead()) {
-        this.gameOverHandler();
+        this.gameOverHandler(this.hero.isDead());
       }
     }.bind(this));
 
@@ -92,9 +95,11 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 5000);
+  }.bind(this), 20000);
   loop.call(this); 
 }
+
+
 
 Game.prototype.stop = function() {
   window.cancelAnimationFrame(this.animation);
