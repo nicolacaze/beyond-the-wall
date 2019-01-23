@@ -10,7 +10,7 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
   // this.heroPainSound = new Sound('../assets/sounds/gruntsound.wav');
   this.gameOverHandler = gameOverHandler;
   this.heroHealthHandler = heroHealthHandler;
-  this.interval;
+  this.enemyGeneratorInterval;
 
   this._generateEnemy = function() {
     // Get a random index on our 1 dimension map array
@@ -98,7 +98,6 @@ Game.prototype.init = function() {
         enemy.die();
       }
       if(this.hero.isDead()) {
-        clearInterval(this.interval);
         this.gameOverHandler(this.hero.isDead());
       }
     }.bind(this));
@@ -111,16 +110,15 @@ Game.prototype.init = function() {
 
   }    
   // Generate a new Enemy every 10 seconds
-  this.interval = setInterval(function() {
+  this.enemyGeneratorInterval = setInterval(function() {
     this._generateEnemy();
   }.bind(this), 5000);
   loop.call(this); 
 }
 
-
-
 Game.prototype.stop = function() {
   window.cancelAnimationFrame(this.animation);
+  clearInterval(this.enemyGeneratorInterval);
 }
 
 Game.prototype.onKeyPress = function(direction, axis) {
