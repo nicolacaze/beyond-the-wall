@@ -107,6 +107,7 @@ WhiteWalker.prototype.checkForTrap = function(map) {
   if (!collision) { return; }
 
   this.die();
+  this.scream();
   return collision;
 }
 
