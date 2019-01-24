@@ -90,7 +90,6 @@ Game.prototype.init = function() {
         this.hero.shoutOnDamage();
         this.heroHealthHandler();
         enemy.die();
-        // enemy.scream();
       }
     }.bind(this));
     if(this.hero.isDead()) {

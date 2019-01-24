@@ -5,44 +5,54 @@
   <title>HTML5 Game</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="css/loading-bar.css"/>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="preload" href="assets/jon-snow-icon.png" as="image">
-  <link rel="preload" href="assets/the-wall.png" as="image">
+  <link rel="preload" href="assets/jon-snow.png" as="image">
+  <link rel="preload" href="assets/white-walker.png" as="image">
+  <link rel="preload" href="assets/tiles-atlas.png" as="image">
+  <link rel="preload" href="assets/mockaroon.png" as="image">
+  <link rel="preload" href="assets/stark-shield.png" as="image">
+
 </head>
 
 <body>
-  <h1>Beyond the wall</h1>
-
 <!-- Here starts the splash screen -->
   <div class="screen displayed">
-    <p>Survive beyond the wall before winter comes...</p>
-    <div class="character-selection">
-      <img src="assets/jon-snow-icon.png" alt="jon-snow-icon">
-      <p>Jon Snow</p>
-    </div>
+    <h1>Beyond the wall</h1>
+    <p>Hello, young Stark. Here are some instructions before you enter beyond the wall. 
+      Try to survice before winter comes!</p>
+    <ul class="instructions">
+      <li>Move with W + S + A + D</li>
+      <li>Avoid holes at all cost but use them against your enemies</li>
+      <li>Use trees to hide</li>
+      <li>Survive 1:00 mintes to win!</li>
+    </ul>
     <button>Play</button>
   </div>
 
   <!-- Here starts the game screen -->
   <div class="game-screen hidden"> 
-    <div class="player-status-card">
-      <p>Jon Snow</p>
-      <progress id="health" value="100" max="100"></progress>
-    </div>
     <div>
-      <div>Winter is coming <span id="time">01:00</span></div>
       <canvas id="canvas" width="1024" height="576"></canvas>
+        <div class="timer"><span id="time">01:00</span></div>
+        <div id="health" class="ldBar"
+        style="width: 20%; height: 20%;"
+        data-stroke="data:ldbar/res,gradient(0,1, #93291E, #ED213A)"
+        data-stroke-dir="reverse"
+        data-value="70"
+        data-preset="circle"
+        ></div>
     </div>
   </div> 
 
   <!-- Here starts the game over screen -->
   <div class="screen game-over-screen hidden">
-    <img src="assets/jon-snow-icon.png" alt="jon-snow-icon">
+    <img>
     <p></p>
     <button>Play Again</button>
   </div> 
+  <script type="text/javascript" src="js/loading-bar.js"></script>
   <script src="js/map.js"></script>
-  <script src="js/sounds.js"></script>
   <script src="js/enemy.js"></script>
   <script src="js/hero.js"></script>
   <script src="js/game.js"></script>

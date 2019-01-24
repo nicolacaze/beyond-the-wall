@@ -8,7 +8,7 @@ function WhiteWalker(canvas, x, y, map) {
   this.y = y;
   this.directionX = 1;
   this.directionY = 1;
-  this.speed = 0.5;
+  this.speed = 0.6;
   this.strength = 25;
   this.image = new Image(45, 64);
   this.width = this.image.width;

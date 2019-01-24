@@ -8,11 +8,14 @@ function main() {
   var playAgainBtn   = document.querySelector('.game-over-screen button');
   var gameOverScreen = document.querySelector('.game-over-screen');
   var gameOverMsg    = document.querySelector('.game-over-screen p');
+  var gameOverImage  = document.querySelector('.game-over-screen img');
   var canvas         = document.getElementById('canvas');
   var timeDisplay    = document.querySelector('#time');
-  var heroHealth     = document.querySelector('#health');
+  var healthElement  = document.getElementById('health');
+  var heroHealth     = 100;
   var gameDuration   = 60;
   var timerInterval;
+  healthElement.ldBar.set(100);
   
   function startGame() {
     
@@ -23,9 +26,11 @@ function main() {
       timeDisplay.textContent = '01:00';
       transitionBetweenScreens(gameScreen, gameOverScreen);
       if(gameOver) {
+        gameOverImage.src = 'assets/stark-blood.png';
         gameOverMsg.textContent = 'You died beyond the wall...';
       } else {
-        gameOverMsg.textContent = 'Congratulations! You survived.';
+        gameOverImage.src = 'assets/stark.png';        
+        gameOverMsg.textContent = 'Congratulations! You survived young wolf.';
       }
     }
     
@@ -49,7 +54,8 @@ function main() {
     }
   
     function decreaseHeroHealth() {
-      heroHealth.value -= 25;
+      heroHealth -= 25;
+      healthElement.ldBar.set(heroHealth);
     }
   
     var game = new Game(canvas, callGameOver, decreaseHeroHealth);
@@ -93,7 +99,7 @@ function main() {
   
   playAgainBtn.addEventListener('click', function() {
     transitionBetweenScreens(gameOverScreen, gameScreen);
-    heroHealth.value = 100;
+    heroHealth.ldBar.value = 100;
     clearInterval(this.timerInterval);
     startGame();
   });
