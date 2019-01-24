@@ -172,7 +172,7 @@ p {
 
 .timer {
   position: absolute;
-  background: no-repeat center/75% url(../assets/stark-shield.png);
+  background: no-repeat center/100% url(../assets/stark-shield.png);
   width: 18%;
   height: 23%;
   display: flex;
@@ -187,6 +187,73 @@ p {
 .ldBar {
   z-index: 1;
   position: absolute;
-  left: 38%;
-  top: 71.3%;
+}
+
+.ldBar-label {
+  display: none;
+}
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+
+    .screen {
+      height: 90vh;
+    }
+
+    .timer {
+      width: 11%;
+      left: 42%;
+    }
+
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+}
+
+
+/* ----------- Projector ----------- */
+@media screen 
+  and (min-device-width: 1000px) 
+  and (max-device-width: 1280px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+  .screen {
+    height: 90vh;
+  }
+
+  .timer {
+    width: 12%;
+    left: 42%;
+  }
+  
+}
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+  .screen {
+    height: 90vh;
+  }
+
+  .timer {
+    width: 40%;
+    height: 50%;
+    left: 72%;
+    top: 70%;
+
+  }
+
 }

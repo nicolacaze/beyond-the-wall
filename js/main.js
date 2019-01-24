@@ -15,7 +15,10 @@ function main() {
   var heroHealth     = 100;
   var gameDuration   = 60;
   var timerInterval;
+
+  // Set default progress bar
   healthElement.ldBar.set(100);
+  
   
   function startGame() {
     
