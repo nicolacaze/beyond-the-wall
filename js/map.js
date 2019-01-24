@@ -28,6 +28,40 @@ function Map(canvas) {
   this.HOLE_TILE = 4;
   this.WATER_TILE = 5;
   this.START_POINT = 17;
+
+  this._generateIcingBorder = function() {
+    // Create icing border for our map
+    this.map.tiles.forEach(function(tile, i, arr){
+      if (i < 16) {
+        arr[i] = this.ICE_TILE;
+      }
+      if (i % 16 === 0) {
+        arr[i] = this.ICE_TILE;
+        arr[i - 1] = this.ICE_TILE;
+      }
+      if (i >= 128) {
+        arr[i] = this.ICE_TILE;
+      } 
+    }.bind(this));
+  }
+
+  this._generateTrapsAndObstacles = function(traps, obstacles) {
+    // Fill the rest of the map randomly with obstacles and free space
+    this.map.tiles.forEach(function(tile, i, arr){
+      if (tile === this.EMPTY_TILE) {
+        var random = Math.random();
+        // With 8% chance put a tree obstacle
+        if(obstacles && random > 0.92) {
+          arr[i] = this.TREE_TILE;
+          // With 2% chance put a hole trap
+        } else if (traps && random > 0.88 && random < 0.9) {
+          arr[i] = this.HOLE_TILE;
+        } else {
+          arr[i] = this.FREE_TILE;
+        }
+      }
+    }.bind(this));
+  }
 }
 
 Map.prototype.getTile = function(col, row) {
@@ -75,35 +109,17 @@ Map.prototype.isTrapTileAtXY = function(x, y) {
 }
 
 Map.prototype.generateRandomMap = function() {
-  // Create icing border for our map
-  this.map.tiles.forEach(function(tile, i, arr){
-    if (i < 16) {
-      arr[i] = this.ICE_TILE;
-    }
-    if (i % 16 === 0) {
-      arr[i] = this.ICE_TILE;
-      arr[i - 1] = this.ICE_TILE;
-    }
-    if (i >= 128) {
-      arr[i] = this.ICE_TILE;
-    } 
-  }.bind(this));
-
-  // Fill the rest of the map randomly with obstacles and free space
-  this.map.tiles.forEach(function(tile, i, arr){
-    if (tile === this.EMPTY_TILE) {
-      var random = Math.random();
-      // With 8% chance put a tree obstacle
-      if(random > 0.92) {
-        arr[i] = this.TREE_TILE;
-        // With 2% chance put a hole trap
-      } else if (random > 0.88 && random < 0.9) {
-        arr[i] = this.HOLE_TILE;
-      } else {
-        arr[i] = this.FREE_TILE;
-      }
-    }
-  }.bind(this));
+  
+  this._generateIcingBorder();
+  this._generateTrapsAndObstacles(true, true);
+  
+  // Check if there is at least one hole on map. If not generate again.
+  var mapCheck = this.map.tiles.filter(function(tile){
+    return tile === this.HOLE_TILE;
+  });
+  if(mapCheck.length < 0) {
+    this._generateTrapsAndObstacles(true, false);
+  }
   // Ensure first tile of our map is free for our Hero
   this.map.tiles[this.START_POINT] = this.FREE_TILE;
 }
