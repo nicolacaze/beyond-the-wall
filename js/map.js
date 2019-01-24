@@ -43,7 +43,7 @@ function Map(canvas) {
         arr[i] = this.ICE_TILE;
       } 
     }.bind(this));
-  }
+  }.bind(this);
 
   this._generateTrapsAndObstacles = function(traps, obstacles) {
     // Fill the rest of the map randomly with obstacles and free space
@@ -116,12 +116,16 @@ Map.prototype.generateRandomMap = function() {
   // Check if there is at least one hole on map. If not generate again.
   var mapCheck = this.map.tiles.filter(function(tile){
     return tile === this.HOLE_TILE;
-  });
+  }.bind(this));
+
   if(mapCheck.length < 0) {
     this._generateTrapsAndObstacles(true, false);
   }
   // Ensure first tile of our map is free for our Hero
   this.map.tiles[this.START_POINT] = this.FREE_TILE;
+  this.map.tiles[this.START_POINT + 1] = this.FREE_TILE;
+  this.map.tiles[this.START_POINT + this.map.cols] = this.FREE_TILE;
+  
 }
 
 Map.prototype.drawMap = function () {
