@@ -1,6 +1,6 @@
 'use strict';
 
-function Game(canvas, gameOverHandler, heroHealthHandler) {
+function Game(canvas, gameOverHandler, heroHealthHandler, shakeTimerHandler) {
   this.context = canvas.getContext('2d');
   this.map = new Map(canvas);
   this.hero = new Hero(canvas, this.map);
@@ -10,6 +10,7 @@ function Game(canvas, gameOverHandler, heroHealthHandler) {
   this.animation;
   this.gameOverHandler = gameOverHandler;
   this.heroHealthHandler = heroHealthHandler;
+  this.shakeTimerHandler = shakeTimerHandler;
   this.enemyGeneratorInterval;
   this.windSound
 
@@ -89,6 +90,7 @@ Game.prototype.init = function() {
         this.hero.loseHealth(enemy);
         this.hero.shoutOnDamage();
         this.heroHealthHandler();
+        this.shakeTimerHandler();
         enemy.die();
       }
     }.bind(this));

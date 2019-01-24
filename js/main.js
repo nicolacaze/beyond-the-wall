@@ -11,13 +11,11 @@ function main() {
   var gameOverImage  = document.querySelector('.game-over-screen img');
   var canvas         = document.getElementById('canvas');
   var timeDisplay    = document.querySelector('#time');
+  var timerShield    = document.querySelector('.timer');
   var healthElement  = document.getElementById('health');
   var heroHealth     = 100;
   var gameDuration   = 60;
   var timerInterval;
-
-  // Set default progress bar
-  // healthElement.ldBar.set(100);
   
   
   function startGame() {
@@ -68,8 +66,18 @@ function main() {
       console.log(heroHealth);
       healthElement.ldBar.set(heroHealth);
     }
+
+    function shakeTimer() {
+      timerShield.classList.add('timer-hit');
+      // Remove class when animation ends
+      timerShield.addEventListener("animationend", function(e) {
+        e.preventDefault;
+        timerShield.classList.remove("timer-hit");
+        void timerShield.offsetWidth;
+      }, false);
+    }
   
-    var game = new Game(canvas, callGameOver, decreaseHeroHealth);
+    var game = new Game(canvas, callGameOver, decreaseHeroHealth, shakeTimer);
     startTimer(gameDuration, timeDisplay, callGameOver);
     game.init();
   

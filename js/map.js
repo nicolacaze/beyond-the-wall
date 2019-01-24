@@ -53,14 +53,22 @@ function Map(canvas) {
         // With 8% chance put a tree obstacle
         if(obstacles && random > 0.92) {
           arr[i] = this.TREE_TILE;
-          // With 2% chance put a hole trap
-        } else if (traps && random > 0.88 && random < 0.9) {
+          // With 3% chance put a hole trap
+        } else if (traps && random > 0.87 && random < 0.9) {
           arr[i] = this.HOLE_TILE;
         } else {
           arr[i] = this.FREE_TILE;
         }
       }
     }.bind(this));
+  }
+
+  this._hasNoTraps = function() {
+    // Check if there is at least one hole on map. If not generate again.
+    var mapCheck = this.map.tiles.filter(function(tile){
+      return tile === this.HOLE_TILE;
+    }.bind(this));
+    return mapCheck.length <= 0
   }
 }
 
@@ -109,23 +117,17 @@ Map.prototype.isTrapTileAtXY = function(x, y) {
 }
 
 Map.prototype.generateRandomMap = function() {
-  
+
   this._generateIcingBorder();
   this._generateTrapsAndObstacles(true, true);
-  
-  // Check if there is at least one hole on map. If not generate again.
-  var mapCheck = this.map.tiles.filter(function(tile){
-    return tile === this.HOLE_TILE;
-  }.bind(this));
 
-  if(mapCheck.length <= 0) {
+  if(this._hasNoTraps) {
     this._generateTrapsAndObstacles(true, false);
   }
   // Ensure first tile of our map is free for our Hero
   this.map.tiles[this.START_POINT] = this.FREE_TILE;
   this.map.tiles[this.START_POINT + 1] = this.FREE_TILE;
   this.map.tiles[this.START_POINT + this.map.cols] = this.FREE_TILE;
-  
 }
 
 Map.prototype.drawMap = function () {
