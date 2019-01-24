@@ -26,6 +26,7 @@ function main() {
     function callGameOver(gameOver) {
       game.stop();
       clearInterval(timerInterval);
+      healthElement.ldBar.set(100);
       timeDisplay.textContent = '01:00';
       transitionBetweenScreens(gameScreen, gameOverScreen);
       if(gameOver) {
