@@ -118,7 +118,7 @@ Map.prototype.generateRandomMap = function() {
     return tile === this.HOLE_TILE;
   }.bind(this));
 
-  if(mapCheck.length < 0) {
+  if(mapCheck.length <= 0) {
     this._generateTrapsAndObstacles(true, false);
   }
   // Ensure first tile of our map is free for our Hero

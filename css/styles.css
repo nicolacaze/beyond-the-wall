@@ -22,6 +22,7 @@ body {
 body {
   color: #111;
   font-family: 'Cinzel', serif;
+  font-weight: 700;
   font-size: 16px;
   line-height: 147%;
 }
@@ -72,7 +73,7 @@ p {
 
 .screen {
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 50vw;
   height: 85vh;
   margin: 0 auto;
@@ -105,11 +106,11 @@ p {
   font-size: 1.2rem;
 }
 
-.instructions li:hover {
+/* .instructions li:hover {
   background: #000;
   color: #fff;
   border: 1px solid #fff;
-}
+} */
 
 .instructions li:last-child {
   margin-bottom: 1rem;
@@ -162,13 +163,14 @@ p {
 }
 
 .game-over-screen img {
-  width: 100%;
+  width: 60%;
   margin: 2rem auto;
 }
 
 .game-over-screen p {
   font-size: 2rem;
   color: #000;
+  line-height: 3rem;
 }
 
 .game-over-screen button {

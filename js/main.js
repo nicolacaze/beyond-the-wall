@@ -27,6 +27,7 @@ function main() {
       game.stop();
       clearInterval(timerInterval);
       healthElement.ldBar.set(100);
+      heroHealth = 100;
       timeDisplay.textContent = '01:00';
       transitionBetweenScreens(gameScreen, gameOverScreen);
       if(gameOver) {
@@ -58,7 +59,9 @@ function main() {
     }
   
     function decreaseHeroHealth() {
+      console.log(heroHealth);
       heroHealth -= 25;
+      console.log(heroHealth);
       healthElement.ldBar.set(heroHealth);
     }
   
