@@ -17,18 +17,22 @@ function main() {
   var timerInterval;
 
   // Set default progress bar
-  healthElement.ldBar.set(100);
+  // healthElement.ldBar.set(100);
   
   
   function startGame() {
-    
-    // Callback function for win and fail scenari
-    function callGameOver(gameOver) {
-      game.stop();
+
+    function resetParameters() {
       clearInterval(timerInterval);
       healthElement.ldBar.set(100);
       heroHealth = 100;
       timeDisplay.textContent = '01:00';
+    }
+    
+    // Callback function for win and fail scenari
+    function callGameOver(gameOver) {
+      game.stop();
+      resetParameters();
       transitionBetweenScreens(gameScreen, gameOverScreen);
       if(gameOver) {
         gameOverImage.src = 'assets/stark-blood.png';
