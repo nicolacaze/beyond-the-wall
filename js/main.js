@@ -102,7 +102,6 @@ function main() {
   
   playAgainBtn.addEventListener('click', function() {
     transitionBetweenScreens(gameOverScreen, gameScreen);
-    heroHealth.ldBar.value = 100;
     clearInterval(this.timerInterval);
     startGame();
   });
