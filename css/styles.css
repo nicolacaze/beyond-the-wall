@@ -44,6 +44,11 @@ p {
   margin: 0;
 }
 
+.timer {
+  display: flex;
+  justify-content: center;
+}
+
 .screen p {
   color: #000;
   text-align: center;
