@@ -109,7 +109,7 @@ Game.prototype.init = function() {
   }    
   // Generate a new Enemy every 10 seconds
   this.enemyGeneratorInterval = setInterval(function() {
-    // this._generateEnemy();
+    this._generateEnemy();
   }.bind(this), 6000);
 
   loop.call(this); 
