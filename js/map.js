@@ -50,11 +50,11 @@ function Map(canvas) {
     this.map.tiles.forEach(function(tile, i, arr){
       if (tile === this.EMPTY_TILE) {
         var random = Math.random();
-        // With 8% chance put a tree obstacle
-        if(obstacles && random > 0.92) {
+        // With 7% chance put a tree obstacle
+        if(obstacles && random > 0.93) {
           arr[i] = this.TREE_TILE;
-          // With 3% chance put a hole trap
-        } else if (traps && random > 0.87 && random < 0.9) {
+          // With 2% chance put a hole trap
+        } else if (traps && random > 0.88 && random < 0.9) {
           arr[i] = this.HOLE_TILE;
         } else {
           arr[i] = this.FREE_TILE;

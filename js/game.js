@@ -33,8 +33,8 @@ function Game(canvas, gameOverHandler, heroHealthHandler, shakeTimerHandler) {
     var x = col * this.map.map.tsize - this.enemyWidth;
     var y = row * this.map.map.tsize - this.enemyHeight;
     var whiteWalker = new WhiteWalker(canvas, x, y, this.map);
-    whiteWalker.scream();
     this.enemies.push(whiteWalker);
+    whiteWalker.scream();
   } 
 
   this._updateGame = function() {
@@ -92,6 +92,7 @@ Game.prototype.init = function() {
         this.heroHealthHandler();
         this.shakeTimerHandler();
         enemy.die();
+        // enemy.scream();
       }
     }.bind(this));
     if(this.hero.isDead()) {
@@ -109,7 +110,7 @@ Game.prototype.init = function() {
   // Generate a new Enemy every 10 seconds
   this.enemyGeneratorInterval = setInterval(function() {
     this._generateEnemy();
-  }.bind(this), 8000);
+  }.bind(this), 6000);
 
   loop.call(this); 
 }

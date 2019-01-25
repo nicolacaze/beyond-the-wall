@@ -41,18 +41,38 @@ function main() {
       }
     }
     
+    // // For playing with A, W, S and D
+    // function onKeyDown(event) {
+    //   switch(event.keyCode) {
+    //     case 68:
+    //     game.onKeyPress('right', 'x');
+    //     break;
+    //     case 65:
+    //     game.onKeyPress('left', 'x');
+    //     break;
+    //     case 87:
+    //     game.onKeyPress('up', 'y');
+    //     break;
+    //     case 83:
+    //     game.onKeyPress('down', 'y');
+    //     break;
+    //     default:
+    //     console.log('No key was pressed');
+    //   }
+    // }
+    // For playing with arrows
     function onKeyDown(event) {
       switch(event.keyCode) {
-        case 68:
+        case 39:
         game.onKeyPress('right', 'x');
         break;
-        case 65:
+        case 37:
         game.onKeyPress('left', 'x');
         break;
-        case 87:
+        case 38:
         game.onKeyPress('up', 'y');
         break;
-        case 83:
+        case 40:
         game.onKeyPress('down', 'y');
         break;
         default:
