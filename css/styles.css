@@ -1,6 +1,11 @@
 
 /* ---- reset ---- */
 
+@font-face {
+  font-family: 'Game of Thrones';
+  src: url(../assets/got-font.ttf);
+}
+
 html {
   box-sizing: border-box;
   background: url(../assets/mockaroon.png) no-repeat center center fixed;
@@ -32,7 +37,6 @@ h1 {
   text-align: center;
   font-size: 3rem;
   font-family: 'Game of Thrones';
-  src: url(../assets/got-font.ttf);
   margin-bottom: 3rem;
   margin-top: 0;
 }
@@ -142,7 +146,6 @@ p {
   background: #000;
   color: #fff;
   font-family: 'Game of thrones';
-  src: url(../assets/got-font.ttf);
   font-size: 1.5rem;
   padding: 1rem 1rem;
   margin-bottom: 2rem;
@@ -156,7 +159,6 @@ p {
   background: #000;
   color: #fff;
   font-family: 'Game of thrones';
-  src: url(../assets/got-font.ttf);
   font-size: 1.5rem;
   padding: 1rem 1rem;
   margin-bottom: 2rem;
@@ -189,7 +191,6 @@ p {
   padding: 1rem 1rem;
   margin-bottom: 2rem;
   font-family: 'Game of thrones';
-  src: url(../assets/got-font.ttf);
   font-size: 1rem;
   cursor: pointer;
 }
@@ -202,7 +203,6 @@ p {
   padding: 1rem 1rem;
   margin-bottom: 2rem;
   font-family: 'Game of thrones';
-  src: url(../assets/got-font.ttf);
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 0px 2px 30px #000;
