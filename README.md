@@ -213,16 +213,12 @@ Task definition in order of priority
 ## Links
 
 
-### Trello
-[Link url](https://trello.com)
-
-
 ### Git
 URls for the project repo and deploy
 [Link Repo](https://github.com/nicolacaze/beyond-the-wall)
-[Link Deploy](http://github.com)
+[Link Deploy](https://nicolacaze.github.io/beyond-the-wall/)
 
 
 ### Slides
 URls for the project presentation (slides)
-[Link Slides.com](http://slides.com)
+https://slides.com/nico/beyond-the-wall
